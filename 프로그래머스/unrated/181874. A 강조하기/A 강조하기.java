@@ -4,10 +4,8 @@ class Solution {
         for (int i =0 ;i<myString.length();i++){
             String s = myString.charAt(i)+"";
 
-            if (s.equals("a")){
+            if (s.equals("a")||s.equals("A")){
                 answer+=s.toUpperCase();
-            } else if (s.equals("A")){
-                answer+=s;
             } else{
                 answer+=s.toLowerCase();
             }
