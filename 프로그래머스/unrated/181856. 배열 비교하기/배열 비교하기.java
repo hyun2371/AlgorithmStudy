@@ -7,12 +7,6 @@ class Solution {
         } else if (arr1.length<arr2.length){
             return -1;
         }
-        
-        if (Arrays.stream(arr1).sum()>Arrays.stream(arr2).sum()){
-            return 1;
-        } else if (Arrays.stream(arr1).sum()<Arrays.stream(arr2).sum()){
-            return -1;
-        } 
-        return 0;
+        return Integer.compare(Arrays.stream(arr1).sum(),Arrays.stream(arr2).sum());
     }
 }
