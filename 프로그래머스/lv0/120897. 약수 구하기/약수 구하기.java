@@ -7,6 +7,6 @@ class Solution {
             if (n%i==0)
                 lst.add(i);
         }
-        return lst.stream().mapToInt(Integer::intValue).toArray();
+        return lst.stream().mapToInt(x->x).toArray();
     }
 }
