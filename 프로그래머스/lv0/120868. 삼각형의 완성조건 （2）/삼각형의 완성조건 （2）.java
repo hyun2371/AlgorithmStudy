@@ -4,18 +4,13 @@ class Solution {
         int answer = 0;
 
         Arrays.sort(sides);
-        int n = 1;
-        
-        //n이 가장 크지 않을 경우
-        while (n<sides[1]){
-            if (n+sides[0]>sides[1]){
+        for (int i =1;i<sides[0]+sides[1];i++){
+            if (i+sides[0]>sides[1]){ //i가 제일 긺
                 answer++;
             }
-            n++;
-        }
-        //n이 가장 클 경우
-        while (n<sides[0]+sides[1]){
-            answer++; n++;
+            else if (sides[0]+sides[1]<i){//i가 제일 길지 않음
+                answer++;
+            }
         }
         return answer;
     }
