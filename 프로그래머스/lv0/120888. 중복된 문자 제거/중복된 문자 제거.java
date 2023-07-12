@@ -1,12 +1,11 @@
 import java.util.*;
 class Solution {
     public String solution(String my_string) {
-        StringBuilder sb = new StringBuilder();
+        String answer ="";
         for (int i =0 ;i<my_string.length();i++){
-            if (!sb.toString().contains(my_string.charAt(i)+"")){
-                sb.append(my_string.charAt(i));
-            }
+            if (!answer.contains(my_string.charAt(i)+""))
+                answer+=my_string.charAt(i)+"";
         }
-        return sb.toString();
+        return answer;
     }
 }
