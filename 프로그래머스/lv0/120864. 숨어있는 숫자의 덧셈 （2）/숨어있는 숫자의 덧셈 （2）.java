@@ -1,19 +1,14 @@
+import java.util.*;
 class Solution {
     public int solution(String my_string) {
         int answer =0;
-        String tmp = "";
-        char[] arr = my_string.toCharArray();
-        for (char c : arr){
-            if (Character.isDigit(c)){
-                tmp+=(c+"");
-            } else {
-                if (!tmp.isEmpty())
-                    answer+=Integer.parseInt(tmp);
-               tmp = "";
+        String[] arr= my_string.replaceAll("[a-zA-z]"," ").split(" ");
+        
+        for (String s : arr){
+            if (!s.equals("")){//연속해서 문자인 경우 "" 들어감
+                answer+=Integer.parseInt(s);
             }
         }
-        if (!tmp.isEmpty())
-            answer+=Integer.parseInt(tmp);
         return answer;
     }
 }
