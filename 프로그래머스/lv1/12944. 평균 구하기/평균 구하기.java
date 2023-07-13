@@ -2,6 +2,10 @@ import java.util.stream.*;
 import java.util.*;
 class Solution {
     public double solution(int[] arr) {
-        return Arrays.stream(arr).average().orElse(0);
+        int sum = 0;
+        for (int n : arr){
+            sum+=n;
+        }
+        return 1.0*sum/arr.length;
     }
 }
