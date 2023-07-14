@@ -1,15 +1,13 @@
 class Solution {
     public long solution(int a, int b) {
-        long answer =0;
-        long la = (long)a;
-        long lb = (long)b;
-        if (a==b) return a;
+        long answer = 0;
         if (a>b){
-            long tmp = b;
-            lb = a;
-            la = tmp;
-        } 
-        for (long i=la;i<=lb;i++)
+            int tmp = b;
+            b = a;
+            a = tmp;
+            
+        }
+        for (int i = a; i<=b;i++)
             answer+=i;
         return answer;
     }
