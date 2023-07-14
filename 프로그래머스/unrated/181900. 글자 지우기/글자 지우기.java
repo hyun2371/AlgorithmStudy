@@ -2,11 +2,10 @@ import java.util.*;
 import java.util.stream.*;
 class Solution {
     public String solution(String my_string, int[] indices) {
-        StringBuilder sb = new StringBuilder(my_string);
-        Arrays.sort(indices);
-        for (int i = indices.length-1;i>-1;i--){
-            sb.deleteCharAt(indices[i]);
+        String[] arr = my_string.split("");
+        for (int i =0;i<indices.length;i++){
+            arr[indices[i]] = "";
         }
-        return sb.toString();
+        return String.join("",arr);
     }
 }
