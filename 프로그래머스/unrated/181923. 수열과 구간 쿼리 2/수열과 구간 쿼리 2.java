@@ -6,19 +6,16 @@ class Solution {
         */
         
         int[] answer = new int[queries.length];
-        
+
         for (int i =0;i<queries.length;i++){
-            int min =10000000, minInd=0;
+            int min =10000000;
             
             for (int z = queries[i][0];z<=queries[i][1];z++){
                 if (arr[z]>queries[i][2]){ //arr>k
-                    if (arr[z]<min){ //min구하기
-                        minInd = z;
-                        min=arr[z];
-                    }
+                    min = Math.min(arr[z],min);
                 }
             }
-            if (min==10000000) answer[i]=-1;
+            if (min==10000000)  answer[i] = -1;
             else answer[i]=min;
         }
         return answer;
