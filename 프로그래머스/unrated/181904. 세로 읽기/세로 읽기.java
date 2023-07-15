@@ -2,10 +2,9 @@ class Solution {
     public String solution(String my_string, int m, int c) {
         String answer = "";
         String[] arr  = my_string.split("");
-        int i =0;
-        while (c+m*i-1<arr.length){
-            answer+=arr[c+m*i-1];
-            i++;
+
+        for (int i =c-1;i<arr.length;i+=m){
+            answer+=arr[i];
         }
         return answer;   
     }
