@@ -7,9 +7,8 @@ class Solution {
             if (id.equals(db[i][0])){
                 if (pw.equals(db[i][1])){
                     return "login";
-                } else {
-                    return "wrong pw";
-                }
+                } 
+                return "wrong pw";
             }
         }
         return "fail";
