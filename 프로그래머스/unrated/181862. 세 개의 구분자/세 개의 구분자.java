@@ -2,10 +2,7 @@ import java.util.*;
 class Solution {
     public String[] solution(String myStr) {
         List<String> lst = new ArrayList<>();
-        String newStr = myStr.replace("a"," ");
-        newStr = newStr.replace("b"," ");
-        newStr = newStr.replace("c", " ");
-        String[] arr = newStr.split(" ");
+        String[] arr = myStr.replaceAll("a|b|c"," ").split(" ");
     
         if (arr.length==0) return new String[]{"EMPTY"};
         
@@ -15,8 +12,12 @@ class Solution {
             }
         }
         
-        String[] answer = lst.toArray(new String[lst.size()]);
-        return answer;
+        String[] answer = new String[lst.size()];
         
+        for (int i =0;i<answer.length;i++){
+            answer[i] = lst.get(i);
+        }
+        
+        return answer;
     }
 }
