@@ -1,20 +1,11 @@
 class Solution {
     public long solution(String numbers) {
-        String answer="";
-        int ind = 0;
-        String[] nums = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
+
+        String[] arr = {"zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine"};
         
-        while (ind<numbers.length()){
-            numbers = numbers.substring(ind,numbers.length());
-         
-            for (int i =0;i<nums.length;i++){
-                if (numbers.startsWith(nums[i])){
-                    answer+=i+"";
-                    ind=nums[i].length();
-                    break;
-                }
-            }
-        }  
-        return Long.parseLong(answer);   
+        for (int i =0;i<arr.length;i++){
+            numbers = numbers.replaceAll(arr[i],String.valueOf(i));
+        }
+        return Long.parseLong(numbers);
     }
 }
