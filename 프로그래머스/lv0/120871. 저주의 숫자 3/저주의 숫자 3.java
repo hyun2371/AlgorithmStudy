@@ -3,20 +3,9 @@ class Solution {
         int answer = 1; int cnt = 1;
         
         while (cnt!=n){
-            boolean isContains = false;
             answer++;
-            if (answer%3==0)
+            if (answer%3==0||String.valueOf(answer).contains("3"))
                 continue;
-            
-            int tmp = answer;
-            while (tmp!=0){
-                if (tmp%10==3){
-                    isContains = true; break;
-                }
-                tmp/=10;
-            }
-            if (isContains) continue;
-            
             cnt++;
         }
         return answer;
