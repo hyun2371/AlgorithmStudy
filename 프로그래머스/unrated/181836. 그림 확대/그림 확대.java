@@ -8,8 +8,7 @@ class Solution {
             
             //answer원소
             for (char c : picture[i].toCharArray()){
-                for (int j=0;j<k;j++)
-                    s+=c;
+                s+= String.valueOf(c).repeat(k);
             }
             
             //answer 원소 k번 삽입
