@@ -1,21 +1,21 @@
 import java.util.*;
+
 public class Main {
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-
-        int n = sc.nextInt();
-        Stack<Integer> stack = new Stack<>();
-
-        for (int i=0;i<n;i++){
-            int num = sc.nextInt();
-            if (num==0) stack.pop();
-            else stack.push(num);
-        }
-        
-        int sum = 0;
-        while (!stack.isEmpty()){
-            sum += stack.pop();
-        }
-        System.out.println(sum);
-    }
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		Deque<Integer> stk = new ArrayDeque<>();
+		int K = sc.nextInt();
+		int total = 0;
+		for (int i = 0; i < K; i++) {
+			int n = sc.nextInt();
+			if (n==0) {
+				total-=stk.pop();
+			}
+			else {
+				stk.push(n);
+				total+=n;
+			}
+		}
+		System.out.println(total);
+	}
 }
