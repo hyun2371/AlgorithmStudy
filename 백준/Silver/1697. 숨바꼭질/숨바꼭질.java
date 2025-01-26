@@ -1,39 +1,37 @@
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    static int[] dis = new int[100001];
+	private static int[] dis = new int[100_001];
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        int N = sc.nextInt(); // 출발지
-        int K = sc.nextInt(); // 목적지
-        if (N == K) {
-            System.out.println(0);
-        } else {
-            System.out.println(BFS(N, K));
-        }
-    }
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
 
-    static int BFS(int start, int target) {
-        Arrays.fill(dis, -1); // 모든 위치를 미방문 상태로 초기화
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(start);
-        dis[start] = 0; // 시작 지점 거리 초기화
+		Arrays.fill(dis,-1);
+		if (N==K)
+			System.out.println(0);
+		else 
+			System.out.println(BFS(N,K));
+	}
 
-        while (!q.isEmpty()) {
-            int x = q.poll();
-            int[] nextPositions = {x + 1, x - 1, 2 * x};
-
-            for (int pos : nextPositions) {
-                if (pos >= 0 && pos <= 100000 && dis[pos] == -1) {
-                    dis[pos] = dis[x] + 1;
-                    if (pos == target) {
-                        return dis[pos];
-                    }
-                    q.add(pos);
-                }
-            }
-        }
-        return -1; // 이론적으로 도달할 수 없는 코드
-    }
+	private static int BFS(int start, int target) {
+		Queue<Integer> q = new LinkedList<>();
+		q.offer(start);
+		dis[start] = 0;
+		while (!q.isEmpty()) {
+			int curX = q.poll();
+			int[] nxArr = {curX-1,curX+1,curX*2};
+			for (int nx : nxArr){
+				if (nx<0||nx>=100001) continue;
+				if (dis[nx]!=-1) continue;
+				dis[nx] = dis[curX] + 1;
+				if (nx==target) return dis[nx];
+				q.offer(nx);
+			}
+		}
+		return -1;
+	}
 }
