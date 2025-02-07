@@ -5,25 +5,19 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		int n = Integer.parseInt(st.nextToken());
-		int k = Integer.parseInt(st.nextToken());
-		int[] arr = new int[n];
-		for (int i = 0; i < n; i++) {
-			arr[i] = Integer.parseInt(br.readLine());
-		}
-		System.out.println(solution(n, k, arr));
-	}
+		int N = Integer.parseInt(st.nextToken());
+		int K = Integer.parseInt(st.nextToken());
 
-	static int solution(int n, int k, int[] arr) {
-		int totalCnt = 0; // 개수 총합
-		for (int i = arr.length - 1; i >= 0; i--) {
-            if (k==0) break;
-			if (arr[i] <= k) {
-				int cnt = k / arr[i];
-				totalCnt += cnt;
-				k = k % arr[i];
-			}
+		int[] c = new int[N + 1];
+		for (int i = 0; i < N; i++) {
+			c[i] = Integer.parseInt(br.readLine());
 		}
-		return totalCnt;
+
+		int cnt = 0, ind = N-1;
+		while (K > 0) {
+			cnt += K / c[ind];
+			K %= c[ind--];
+		}
+		System.out.println(cnt);
 	}
 }
