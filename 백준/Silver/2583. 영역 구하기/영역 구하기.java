@@ -1,5 +1,5 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	static int[] dx = {-1, 1, 0, 0};
@@ -8,7 +8,6 @@ public class Main {
 	static int M, N;
 	static int area;
 	static List<Integer> areas = new ArrayList<>();
-
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
@@ -31,9 +30,10 @@ public class Main {
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < N; j++) {
 				if (dis[i][j] == 0) {
-					BFS(i, j);
+					DFS(i, j);
 					cnt++;
 					areas.add(area);
+					area = 0;
 				}
 			}
 		}
@@ -46,7 +46,6 @@ public class Main {
 		}
 		System.out.println(sb);
 	}
-
 	private static void fillArr(int x1, int y1, int x2, int y2) {
 		for (int i = M - y2; i < M - y1; i++) {
 			for (int j = x1; j < x2; j++) {
@@ -55,36 +54,15 @@ public class Main {
 		}
 	}
 
-	private static void BFS(int x, int y) {
-		dis[x][y] = 1;
-		area = 1;
-		Queue<Pos> q = new LinkedList<>();
-		q.offer(new Pos(x, y));
-
-		while (!q.isEmpty()) {
-			Pos cur = q.poll();
-			for (int d = 0; d < 4; d++) {
-				int nx = cur.x + dx[d];
-				int ny = cur.y + dy[d];
-
-				if (nx < 0 || ny < 0 || nx >= M || ny >= N)
-					continue;
-				if (dis[nx][ny] != 0)
-					continue; //-1 방문 불가, 1이상 방문함
-				dis[nx][ny] = dis[cur.x][cur.y] + 1;
-				q.offer(new Pos(nx, ny));
-				area++;
-			}
+	private static void DFS(int x, int y) {
+		area++;
+		dis[x][y] = -1;
+		for (int d = 0; d < 4; d++) {
+			int nx = x + dx[d];
+			int ny = y + dy[d];
+			if (nx < 0 || ny < 0 || nx >= M || ny >= N) continue;
+			if (dis[nx][ny] != 0) continue; //-1 방문 불가, 1이상 방문함
+			DFS(nx, ny);
 		}
-	}
-}
-
-class Pos {
-	int x;
-	int y;
-
-	public Pos(int x, int y) {
-		this.x = x;
-		this.y = y;
 	}
 }
