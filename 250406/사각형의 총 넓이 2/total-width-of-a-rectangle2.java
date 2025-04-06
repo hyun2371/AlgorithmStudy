@@ -1,8 +1,10 @@
 import java.util.Scanner;
 public class Main {
+    private static final int OFFSET = 100;
+    private static final int LEGNTH=200;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        boolean[][] board = new boolean[201][201];
+        boolean[][] board = new boolean[LEGNTH+1][LEGNTH+1];
         int maxX=0, maxY=0;
         int n = sc.nextInt(); // 사각형 개수
         int[] x1 = new int[n];
@@ -11,10 +13,10 @@ public class Main {
         int[] y2 = new int[n];
 
         for (int t = 0; t < n; t++) {
-            x1[t] = sc.nextInt();
-            y1[t] = sc.nextInt();
-            x2[t] = sc.nextInt();
-            y2[t] = sc.nextInt();   
+            x1[t] = sc.nextInt() + OFFSET;
+            y1[t] = sc.nextInt()+OFFSET;
+            x2[t] = sc.nextInt()+OFFSET;
+            y2[t] = sc.nextInt()+OFFSET;   
             maxX = Math.max(x2[t],maxX);
             maxY = Math.max(y2[t],maxY);
             for (int i=x1[t];i<x2[t];i++){
