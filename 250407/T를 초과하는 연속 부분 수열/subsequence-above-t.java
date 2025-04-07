@@ -12,9 +12,8 @@ public class Main {
         int cnt=0, answer=0;
         
         for (int i=0;i<n;i++){
-            if (arr[i]<=t) cnt=0;
-            else if (i==0||arr[i]<=arr[i-1]) cnt=1;
-            else cnt++;
+            if (arr[i]<=t) cnt=0; //t보다 작은수
+            else cnt++; //t보다 큼
 
             answer=Math.max(cnt,answer);
         }
