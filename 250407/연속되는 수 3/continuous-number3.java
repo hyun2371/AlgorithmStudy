@@ -6,10 +6,10 @@ public class Main {
         int n = sc.nextInt();
         int[] arr = new int[n];
 
-        int cnt=1, answer = 0;
+        int cnt=1, answer = 1;
         for (int i = 0; i < n; i++){
             arr[i] = sc.nextInt();
-            if (i==0||arr[i-1]*arr[i]>0){
+            if (i>=1&&arr[i-1]*arr[i]>0){
                 cnt++;
             }
             else {
