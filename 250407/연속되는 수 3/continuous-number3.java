@@ -10,10 +10,9 @@ public class Main {
         for (int i = 0; i < n; i++){
             arr[i] = sc.nextInt();
         }
-        int cnt=1, answer = 1;
-        for (int i = 0; i < n; i++){
-           
-            if (i>=1&&arr[i-1]*arr[i]>0){
+        int cnt=1, answer = 0;
+        for (int i = 1; i < n; i++){
+            if (arr[i-1]*arr[i]>0){
                 cnt++;
             }
             else cnt=1;
