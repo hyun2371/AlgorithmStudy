@@ -13,8 +13,8 @@ public class Main {
                 answer = Math.max(cnt,answer);
                 cnt=1;
             }
-
         }
+        answer = Math.max(cnt,answer);
         System.out.println(answer);
     }
 }
