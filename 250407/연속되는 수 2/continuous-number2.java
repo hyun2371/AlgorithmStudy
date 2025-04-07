@@ -8,7 +8,7 @@ public class Main {
         int cnt = 1, answer = 1;
         for (int i = 0; i < n; i++) {
             arr[i] = sc.nextInt();
-            if (i==0||arr[i]==arr[i-1]) cnt++;
+            if (i>=1&&arr[i]==arr[i-1]) cnt++;
             else {
                 answer = Math.max(cnt,answer);
                 cnt=1;
@@ -18,3 +18,6 @@ public class Main {
         System.out.println(answer);
     }
 }
+
+
+
