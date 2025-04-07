@@ -24,10 +24,12 @@ public class Main {
             }
         }
 
+        boolean isFirstExists = false;
         int minX=Integer.MAX_VALUE,maxX=Integer.MIN_VALUE,minY=Integer.MAX_VALUE,maxY=Integer.MIN_VALUE;
         for (int r=0;r<LEN;r++){
             for (int c=0;c<LEN;c++){
                 if (area[r][c]){
+                    isFirstExists = true;
                     minX = Math.min(r,minX);
                     minY= Math.min(c,minY);
                     maxX = Math.max(r,maxX);
@@ -35,6 +37,10 @@ public class Main {
                 }
             }
         }
-        System.out.println((maxX+1-minX)*(maxY+1-minY));
+
+        int answer = 0;
+        if (isFirstExists) answer =(maxX-minX+1)*(maxY-minY+1);
+        else answer = 0;
+        System.out.println(answer);
     }
 }
