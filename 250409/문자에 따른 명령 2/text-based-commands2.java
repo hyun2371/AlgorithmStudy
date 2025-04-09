@@ -12,7 +12,7 @@ public class Main {
         int dir = 0;
         for (char cmd:s.toCharArray()){
             if (cmd=='L'){
-                dir = (3-dir)%4;
+                dir = (dir - 1 + 4) % 4;
             }else if (cmd=='R'){
                 dir = (dir+1)%4;
             }else {
