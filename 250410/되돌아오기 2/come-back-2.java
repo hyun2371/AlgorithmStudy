@@ -14,13 +14,13 @@ public class Main {
             if (cmd=='R'){
                 dirNum = (dirNum+1)%4;
             } else if (cmd=='L'){
-                dirNum = 3-dirNum;
+                dirNum = (dirNum+3)%4;
             } else {
                 x+=dx[dirNum];
                 y+=dy[dirNum];
-               if (x==0&&y==0){
-                  ans = totalTime; break;
-               }
+                if (x==0&&y==0){
+                ans = totalTime; break;
+                }
             }
         }
         System.out.println(ans);
