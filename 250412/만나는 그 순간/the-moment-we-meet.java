@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     static int[] a = new int[1_000_001]; 
     static int[] b = new int[1_000_001];
-    static int t,aInd = 0, bInd = 0,pos;
+    static int t,timeA = 1, timeB = 1;
     static char dir;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -15,7 +15,7 @@ public class Main {
             t = sc.nextInt();
             moveA(dir,t);
         }
-        pos=0;
+
         for (int i=0;i<m;i++){
             dir = sc.next().charAt(0);
             t = sc.nextInt();
@@ -23,7 +23,7 @@ public class Main {
         }
 
         int time = -1;
-        for (int i=1;i<=Math.max(aInd, bInd);i++){
+        for (int i=1;i<Math.min(timeA, timeB);i++){
             if (a[i]==b[i]){
                 time = i; break;
             }
@@ -33,17 +33,21 @@ public class Main {
 
     private static void moveA(char dir, int t){
         while (t-->0){
-            if(dir=='R') pos++;
-            else pos--;
-            a[++aInd] = pos;
+            if(dir=='R') 
+                a[timeA] = a[timeA-1]+1;
+            else 
+                a[timeA] = a[timeA-1]-1;
+            timeA++;
         }
     }
 
     private static void moveB(char dir, int t){
        while (t-->0){
-            if(dir=='R') pos++;
-            else pos--;
-            b[++bInd] = pos;
+            if(dir=='R') 
+                b[timeB] = b[timeB-1]+1;
+            else 
+                b[timeB] = b[timeB-1]-1;
+            timeB++;
         }
     }
 }
