@@ -1,8 +1,8 @@
 import java.util.Scanner;
 
 public class Main {
-    static int[] a = new int[100_001]; 
-    static int[] b = new int[100_001];
+    static int[] a = new int[1_000_001]; 
+    static int[] b = new int[1_000_001];
     static int t,aInd = 0, bInd = 0,pos;
     static char dir;
     public static void main(String[] args) {
