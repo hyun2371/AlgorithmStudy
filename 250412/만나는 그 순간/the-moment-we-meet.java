@@ -3,7 +3,7 @@ import java.util.Scanner;
 public class Main {
     static int[] a = new int[1001]; 
     static int[] b = new int[1001];
-    static int t,aInd = 1, bInd = 1,pos;
+    static int t,aInd = 0, bInd = 0,pos;
     static char dir;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -23,7 +23,7 @@ public class Main {
         }
 
         int time = -1;
-        for (int i=1;i<Math.max(aInd, bInd);i++){
+        for (int i=1;i<=Math.max(aInd, bInd);i++){
             if (a[i]==b[i]){
                 time = i; break;
             }
@@ -35,7 +35,7 @@ public class Main {
         while (t-->0){
             if(dir=='R') pos++;
             else pos--;
-            a[aInd++] = pos;
+            a[++aInd] = pos;
         }
     }
 
@@ -43,7 +43,7 @@ public class Main {
        while (t-->0){
             if(dir=='R') pos++;
             else pos--;
-            b[bInd++] = pos;
+            b[++bInd] = pos;
         }
     }
 }
