@@ -23,7 +23,7 @@ public class Main {
         }
 
         int time = -1;
-        for (int i=1;i<Math.min(timeA, timeB);i++){
+        for (int i=1;i<timeA;i++){
             if (a[i]==b[i]){
                 time = i; break;
             }
