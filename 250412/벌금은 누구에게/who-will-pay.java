@@ -6,16 +6,13 @@ public class Main {
         int n = sc.nextInt();
         int m = sc.nextInt();
         int k = sc.nextInt();
-        int[] penalizedPerson = new int[m];
+
         int[] cnt = new int[n+1];
-        for (int i = 0; i < m; i++) {
-            penalizedPerson[i] = sc.nextInt();
-        }
-        // Please write your code here.
         int answer = -1;
-        for (int i=0;i<m;i++){
-            if (++cnt[penalizedPerson[i]]>=3){
-                answer = penalizedPerson[i]; break;
+        for (int i = 0; i < m; i++) {
+            int pp = sc.nextInt();
+            if (++cnt[pp]>=3){
+                answer = pp; break;
             }
         }
         System.out.println(answer);
