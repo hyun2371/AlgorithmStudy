@@ -11,7 +11,7 @@ public class Main {
         int answer = -1;
         for (int i = 0; i < m; i++) {
             int pp = sc.nextInt();
-            if (++cnt[pp]>=3){
+            if (++cnt[pp]>=k){
                 answer = pp; break;
             }
         }
