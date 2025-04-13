@@ -6,7 +6,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int m = sc.nextInt();
-        int v,t,aTime=1,bTime=1;
+        int v,t,time=1;
 
         int[] aPos = new int[MAX_L+1];
         for (int i = 0; i < n; i++) {
@@ -14,42 +14,36 @@ public class Main {
             t = sc.nextInt();
 
             while (t-->0){
-                aPos[aTime] = aPos[aTime-1]+v;
-                aTime++;
+                aPos[time] = aPos[time-1]+v;
+                time++;
             }
         }
 
+        time = 1;
         int[] bPos = new int[MAX_L+1];
         for (int i = 0; i < m; i++) {
             v = sc.nextInt();
             t = sc.nextInt();
 
             while (t-->0){
-                bPos[bTime] = bPos[bTime-1]+v;
-                bTime++;
+                bPos[time] = bPos[time-1]+v;
+                time++;
             }
         }
         
         int cnt = 0;
         char winner = '0';
-        for (int i=1;i<aTime;i++){
-            if (winner=='0'){
-                if (aPos[i]>bPos[i]) winner = 'a';
-                else if (aPos[i]<bPos[i]) winner = 'b';
-            } 
-            else if (winner=='b'){
-                if (aPos[i]>bPos[i]) {
-                    winner='a';
-                    cnt++;
-                }
+        for (int i=1;i<time;i++){
+            if (aPos[i]>bPos[i]){
+                if (winner=='b')  cnt++;
+                winner='a';
             }
-            else if (winner=='a') {
-                if (aPos[i]<bPos[i]){
-                    winner='b';
-                    cnt++;
-                }
+            else if (aPos[i]<bPos[i]){
+                if (winner=='a') cnt++;
+                winner='b';
             }
         }
+
         System.out.println(cnt);
     }
 }
