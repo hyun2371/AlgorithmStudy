@@ -38,7 +38,7 @@ public class Main {
             }
         }
         
-        boolean isSame= false;
+        boolean isSame= true;
         int cnt = 0;
         for (int i=1;i<Math.max(timeA,timeB);i++){
             if (i>=timeA) a[i] = a[i-1];
