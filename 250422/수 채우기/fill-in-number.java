@@ -13,7 +13,7 @@ public class Main {
             int tmp = i+remain/2; // 나머지 2로 구성
             answer = Math.min(tmp,answer);
         }
-        if (n%2!=0&&n<5) answer = -1; //2,5로 구성불가
+        if (answer==Integer.MAX_VALUE) answer = -1; //2,5로 구성불가
         System.out.println(answer);
     }
 }
