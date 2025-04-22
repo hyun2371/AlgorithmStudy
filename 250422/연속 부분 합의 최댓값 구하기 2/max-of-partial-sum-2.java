@@ -8,11 +8,12 @@ public class Main {
             a[i] = sc.nextInt();
         }
         // Please write your code here.
-        int sum = 0;
+        int sum = 0, answer=Integer.MIN_VALUE;
         for (int i=0;i<N;i++){
             if (sum<0) sum=a[i];
             else sum+=a[i];
+            answer = Math.max(sum, answer);
         }
-        System.out.println(sum);
+        System.out.println(answer);
     }
 }
