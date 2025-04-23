@@ -10,8 +10,7 @@ public class Main {
            pq.offer(sc.nextInt());
         }
         
-        
-        while(pq.size()!=1){
+        while(pq.size()>=2){
             int num1 = pq.poll();
             int num2 = pq.poll();
             if (num1!=num2)
