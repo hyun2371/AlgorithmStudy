@@ -15,7 +15,7 @@ public class Main {
         for (int i = 0; i < M; i++) {
             int target = sc.nextInt();
             int lo = lowerBound(target);
-            if (arr[lo]==target)
+            if (lo<N&&arr[lo]==target)
                 System.out.println(lo+1);
             else System.out.println(-1);
         }
