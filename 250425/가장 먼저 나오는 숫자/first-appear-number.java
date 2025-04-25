@@ -14,7 +14,10 @@ public class Main {
         int[] queries = new int[M];
         for (int i = 0; i < M; i++) {
             int target = sc.nextInt();
-            System.out.println(lowerBound(target));
+            int lo = lowerBound(target);
+            if (arr[lo]==target)
+                System.out.println(lo+1);
+            else System.out.println(-1);
         }
         // Please write your code here.
     }
@@ -30,7 +33,6 @@ public class Main {
             }
             else lt = mid+1;
         }
-        if (arr[minIdx]==target) return minIdx+1;
-        return -1;
+        return minIdx;
     }
 }
