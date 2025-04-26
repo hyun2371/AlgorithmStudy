@@ -5,16 +5,27 @@ public class Main {
         String a = sc.next();
         
         char[] arr = a.toCharArray();
+        boolean flag = false;
         for (int i=0;i<arr.length;i++){
             if (arr[i]=='0') {
-                arr[i]='1'; break;
+                arr[i]='1'; 
+                flag = true;
+                break;
             }
         }
-        
-        int total=0;
-        for (int i=arr.length-1,mult=0;i>=0;i--,mult++){
-            total+=(arr[i]-'0')*Math.pow(2,mult);
+        if (!flag){
+            arr[arr.length-1] = '0';
         }
-        System.out.println(total);
+        
+        
+        System.out.println(bToD(arr));
+    }
+
+    private static int bToD(char[] arr){
+        int decimal = 0;
+        for (int i=0;i<arr.length;i++){
+            decimal= 2*decimal+arr[i]-'0';
+        }
+        return decimal;
     }
 }
