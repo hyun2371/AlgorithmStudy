@@ -14,6 +14,10 @@ public class Main {
         }
         int cnt=0;
         char start = grid[0][0];
+        char end = grid[R-1][C-1];
+        if (start==end) {
+            System.out.println(0); System.exit(0);
+        }
         for (int i=1;i<=R-3;i++){
             for (int j=1;j<=C-3;j++){
                 if (grid[i][j]!=start){
