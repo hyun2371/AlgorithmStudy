@@ -25,6 +25,7 @@ public class Main {
                 }
             }
         }
+        System.out.println(0);
     }
     private static boolean isRange(int x, int y){
         return x>=0&&y>=0&&x<LEN&&y<LEN;
