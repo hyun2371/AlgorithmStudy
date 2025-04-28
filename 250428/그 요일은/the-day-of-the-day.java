@@ -8,32 +8,36 @@ public class Main {
         int d1 = sc.nextInt();
         int m2 = sc.nextInt();
         int d2 = sc.nextInt();
-        String yoil = sc.next();
+        String A = sc.next();
 
-        int term = getElapsedTime(m2, d2)-getElapsedTime(m1, d1); // 날짜 차이
-        term-=yoilDiff(yoil); //yoil로 이동함에 따라 term 차감
-
-        int answer=0;
-        if (term/7>0) answer = term/7+1;
+        int startDay = getElapsedDays(m1,d1);
+        int endDay = getElapsedDays(m2,d2);
+        int curYoil = getYoil(A);
+        
+        int answer = 0;
+        for (int d = startDay;d<=endDay;d++){
+            if (curYoil==getYoil(A)) answer++;
+            curYoil = (curYoil+1)%7;
+        }
         System.out.println(answer); // yoil로 이동했을 때 1번 더함
     }
 
-    private static int getElapsedTime(int m, int d){
-        int elapsedTime = 0;
+    private static int getElapsedDays(int m, int d){
+        int elapsedDays = 0;
         for (int i=1;i<m;i++){
-            elapsedTime+=dpm[i];
+            elapsedDays+=dpm[i];
         }
-        elapsedTime+=d;
-        return elapsedTime;
+        elapsedDays+=d;
+        return elapsedDays;
     }
 
-    private static int yoilDiff(String yoil){
+    private static int getYoil(String yoil){
         if (yoil.equals("Mon")) return 0;
         if (yoil.equals("Tue")) return 1;
         if (yoil.equals("Wed")) return 2;
         if (yoil.equals("Thu")) return 3;
         if (yoil.equals("Fri")) return 4;
         if (yoil.equals("Sat")) return 5;
-        else return 6;
+        return 6;
     }
 }
