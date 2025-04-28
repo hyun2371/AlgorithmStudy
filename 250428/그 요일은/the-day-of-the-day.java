@@ -12,7 +12,7 @@ public class Main {
 
         int startDay = getElapsedDays(m1,d1);
         int endDay = getElapsedDays(m2,d2);
-        int curYoil = getYoil(A);
+        int curYoil = 0;
         
         int answer = 0;
         for (int d = startDay;d<=endDay;d++){
