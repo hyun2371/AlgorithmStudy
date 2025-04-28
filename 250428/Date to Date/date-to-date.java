@@ -10,15 +10,16 @@ public class Main {
         int d1 = Integer.parseInt(st.nextToken());
         int m2 = Integer.parseInt(st.nextToken());
         int d2 = Integer.parseInt(st.nextToken());
-        int term = getElapsedDay(m2,d2)-getElapsedDay(m1,d1);
+        int term = getElapsedDay(m2,d2)-getElapsedDay(m1,d1)+1;
         System.out.println(term);
     }
     private static int getElapsedDay(int month, int day){
         int elapsedDay = 0;
-        month--; // 해당 월은 day만 더하므로 포함 안됨
-        while (month-->=1){
-            elapsedDay += dpm[month];
+        for (int i=1;i<month;i++){
+            elapsedDay+=dpm[i];
         }
-        return elapsedDay+day;
+        elapsedDay+=day;
+        
+        return elapsedDay;
     }
 }
