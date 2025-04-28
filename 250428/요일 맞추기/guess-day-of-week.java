@@ -10,9 +10,11 @@ public class Main {
         int d1 = sc.nextInt();
         int m2 = sc.nextInt();
         int d2 = sc.nextInt();
+
         int term = getElapsedDay(m2,d2)-getElapsedDay(m1,d1);
-        String ans = term>=0?yoil[term%7]: yoil[7-Math.abs(term)%7];
-        System.out.println(ans);
+        while (term<0) term+=7; // 요일 같음
+
+        System.out.println(yoil[term%7]);
     }
 
     private static int getElapsedDay(int month, int day){
