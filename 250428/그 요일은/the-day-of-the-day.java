@@ -12,7 +12,10 @@ public class Main {
 
         int term = getElapsedTime(m2, d2)-getElapsedTime(m1, d1); // 날짜 차이
         term-=yoilDiff(yoil); //yoil로 이동함에 따라 term 차감
-        System.out.println(term/7+1); // yoil로 이동했을 때 1번 더함
+
+        int answer=0;
+        if (term/7>0) answer = term/7+1;
+        System.out.println(answer); // yoil로 이동했을 때 1번 더함
     }
 
     private static int getElapsedTime(int m, int d){
