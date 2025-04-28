@@ -11,8 +11,7 @@ public class Main {
         }
         
         for (int i=0;i<n;i++){
-            for (int j=0;j<n;j++){
-                if (j==i-1||j==i+1||i==j) continue;
+            for (int j=i+2;j<n;j++){
                 maxSum = Math.max(maxSum,arr[i]+arr[j]);
             }
         }
