@@ -34,20 +34,20 @@ public class Main {
     private static int findWinner(int x, int y){
         for (int d =0;d<8;d++){
             int cnt = 1;
+            int curX = x, curY = y;
             while (true){
-                int nx = x+dx[d];
-                int ny = y+dy[d];
+                int nx = curX+dx[d];
+                int ny = curY+dy[d];
                 if (!isRange(nx,ny))break;
-
                 if (arr[nx][ny]!=arr[x][y]) break;
+
                 cnt++;
-                if (cnt==3) {
-                    midX = nx+1; midY = ny+1;
-                }
                 if (cnt==5) {
-                    return arr[x][y];
+                    midX = x + dx[d]*2 +1;
+                    midY = y + dy[d]*2+1;
+                    return arr[nx][ny];
                 }
-                x = nx; y = ny;
+                curX = nx; curY = ny;
             }
         }
         return 0;
