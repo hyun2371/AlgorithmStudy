@@ -9,7 +9,7 @@ public class Main {
             arr[i] = sc.nextInt();
         
         int answer = Integer.MIN_VALUE;
-        for (int i=0;i<n-k;i++){ //
+        for (int i=0;i<=n-k;i++){ // n=6 k=3 -> i=0~n-4 // 0,2
             int sum = 0;
             for (int j=i;j<i+k;j++)
                 sum+=arr[j];
