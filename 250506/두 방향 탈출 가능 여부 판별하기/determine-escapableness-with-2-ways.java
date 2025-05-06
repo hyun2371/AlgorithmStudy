@@ -27,7 +27,6 @@ public class Main {
         visited[x][y] = true;
         DFS(x+1,y);
         DFS(x,y+1);
-        visited[x][y] = false;
     }
 
     private static boolean inRange(int x, int y){
