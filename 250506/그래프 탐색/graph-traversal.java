@@ -18,6 +18,7 @@ public class Main {
             graph.get(x).add(y);
             graph.get(y).add(x);
         }
+        visited[1] = true;
         DFS(1);
         System.out.println(cnt);
     }
@@ -25,8 +26,8 @@ public class Main {
     private static void DFS(int v){
         for (int cv: graph.get(v)){
             if (!visited[cv]){
-                if (cv!=1) cnt++;
                 visited[cv] = true;
+                cnt++;
                 DFS(cv);
             }
         }       
