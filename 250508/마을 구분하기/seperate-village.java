@@ -3,9 +3,8 @@ import java.util.*;
 public class Main {
     static int[] dx = {-1,1,0,0};
     static int[] dy = {0,0,-1,1};
-    static int N;
+    static int N,pCnt;
     static int[][] graph;
-    static int pCnt;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
@@ -20,9 +19,9 @@ public class Main {
         for (int i = 0; i < N; i++){
             for (int j = 0; j < N; j++){
                 if (graph[i][j]==1){
+                    pCnt = 1;
                     DFS(i,j);
                     pCnts.add(pCnt);
-                    pCnt = 0;
                     vCnt++;
                 } 
             }
@@ -38,12 +37,13 @@ public class Main {
     }
 
     private static void DFS(int x, int y){
-        if (!inRange(x,y)||graph[x][y]==0) return;
-        pCnt++;
         graph[x][y] = 0;
         for (int dirNum=0;dirNum<4;dirNum++){
             int nx = x+dx[dirNum];
             int ny = y+dy[dirNum];
+            if (!inRange(nx,ny)||graph[nx][ny]==0) continue;
+            graph[nx][ny] = 0;
+            pCnt++;
             DFS(nx, ny);
         }
     }
