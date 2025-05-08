@@ -21,10 +21,10 @@ public class Main {
         }
 
         //안전영역 최대 개수와 그 때 높이 
-        int maxCnt = 0, answerH=0;
+        int maxCnt = Integer.MIN_VALUE, answerH=0;
         for (int h=1;h<=tmp;h++){
             int cnt = 0; // 높이별 안전영역 개수
-            visited = new boolean[N][M];
+            visited = new boolean[N][M]; //방문여부 초기화
             for (int i=0;i<N;i++){
                 for (int j=0;j<M;j++){
                     if (!visited[i][j]&&graph[i][j]>h) {//방문 안전영역 방문
