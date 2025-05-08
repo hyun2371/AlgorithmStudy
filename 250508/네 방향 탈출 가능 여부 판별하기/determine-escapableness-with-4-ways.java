@@ -1,6 +1,7 @@
 import java.util.*;
 public class Main {
     private static boolean[][] visited;
+    private static int[][] graph;
     private static int N,M;
     static int[] dx = {-1,1,0,0};
     static int[] dy = {0,0,-1,1};
@@ -8,9 +9,8 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
         M = sc.nextInt();
+        graph = new int[N][M];
         visited = new boolean[N][M];
-
-        int[][] graph = new int[N][M];
         for (int i = 0; i < N; i++)
             for (int j = 0; j < M; j++)
                 graph[i][j] = sc.nextInt();
@@ -28,7 +28,7 @@ public class Main {
                 int nx = cur.x+dx[d];
                 int ny = cur.y+dy[d];
                 if (nx==N-1&&ny==M-1) return 1;
-                if (!inRange(nx,ny)||visited[nx][ny]) continue;
+                if (!inRange(nx,ny)||visited[nx][ny]||graph[nx][ny]==0) continue;
                 visited[nx][ny] = true;
                 q.offer(new Pos(nx,ny));
             }
