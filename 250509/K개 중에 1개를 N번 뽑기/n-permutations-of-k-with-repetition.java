@@ -1,18 +1,13 @@
 import java.util.*;
 
 public class Main {
-    static int[] nums, targets;
+    static int[] targets;
     static int N,K;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt(); 
         K = sc.nextInt();  //추출
-
-        nums = new int[N];
         targets = new int[K];
-        for (int i=0;i<N;i++){
-            nums[i] = i+1;
-        }
         
         DFS(0);
     }
