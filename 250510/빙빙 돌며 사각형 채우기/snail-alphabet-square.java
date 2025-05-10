@@ -10,7 +10,7 @@ public class Main {
         M = sc.nextInt();
         arr = new char[N][M];
         boolean[][] visited = new boolean[N][M];
-        int dirNum = 3;
+        int dirNum = 0;
         char ch = 'A';
         
         int x = 0,y = 0;
@@ -19,13 +19,13 @@ public class Main {
         
         for (int i=2;i<=N*M;i++){
             int nx = x+dx[dirNum];
-            int ny = y+dy[dirNum];
-            ch = (char)(ch+1);      
+            int ny = y+dy[dirNum];      
             if (!inRange(nx,ny)||visited[nx][ny]){
                 dirNum = (dirNum+1)%4;
                 nx = x+dx[dirNum];
                 ny = y+dy[dirNum];
-            }     
+            }  
+            ch = (char)(ch+1); 
             arr[nx][ny] = ch;
             visited[nx][ny] = true;
             x = nx; y = ny;         
