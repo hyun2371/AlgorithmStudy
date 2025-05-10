@@ -1,6 +1,7 @@
 import java.util.Scanner;
 public class Main {
     static int[] disA, disB;
+    static int indA=1, indB = 1;
     static final int MAX_LEN = 1000_000;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
@@ -8,7 +9,6 @@ public class Main {
         int M = sc.nextInt();
         disA = new int[MAX_LEN+1]; //시간별 거리
         disB = new int[MAX_LEN+1]; 
-        int indA = 1, indB = 1;
 
         for (int i = 0; i < N; i++) {
             int v = sc.nextInt(); //속도
@@ -29,24 +29,26 @@ public class Main {
         }
 
         System.out.print(getComb());
+        
     }
 
     private static int getComb(){
         char status = ' ';
         int comb = 0;
-        for (int i=1;i<=14;i++){
-            if (disA[i]==disB[i]&&status!='C'){
+        for (int i=1;i<indB;i++){
+            if (disA[i]==disB[i]&&status!='C'){ // a,b 동일
                 comb++;
                 status = 'C';
             }
-            else if (disA[i]>disB[i]&&status!='A'){
+            else if (disA[i]>disB[i]&&status!='A'){ //a 역전
                 comb++;
                 status = 'A';
             }
-            else if (disA[i]<disB[i]&&status!='B'){
+            else if (disA[i]<disB[i]&&status!='B'){//b 역전
                 comb++;
                 status = 'B';
             }
+
         }
         return comb;
     }
