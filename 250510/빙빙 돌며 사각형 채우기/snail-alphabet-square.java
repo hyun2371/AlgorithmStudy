@@ -25,7 +25,8 @@ public class Main {
                 nx = x+dx[dirNum];
                 ny = y+dy[dirNum];
             }  
-            ch = (char)(ch+1); 
+            ch = (char)(ch+1);
+            if (ch>'Z') ch = 'A'; 
             arr[nx][ny] = ch;
             visited[nx][ny] = true;
             x = nx; y = ny;         
