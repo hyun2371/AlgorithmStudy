@@ -17,7 +17,7 @@ public class Main {
         arr[x][y]=ch;
         visited[x][y] = true; 
         
-        for (int i=2;i<=N*M;i++){
+        for (int i=1;i<N*M;i++){
             int nx = x+dx[dirNum];
             int ny = y+dy[dirNum];      
             if (!inRange(nx,ny)||visited[nx][ny]){
@@ -25,9 +25,7 @@ public class Main {
                 nx = x+dx[dirNum];
                 ny = y+dy[dirNum];
             }  
-            ch = (char)(ch+1);
-            if (ch>'Z') ch = 'A'; 
-            arr[nx][ny] = ch;
+            arr[nx][ny] = (char)('A'+i%26);
             visited[nx][ny] = true;
             x = nx; y = ny;         
         }
