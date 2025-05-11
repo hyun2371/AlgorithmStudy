@@ -23,14 +23,20 @@ class Solution {
     }
     
     private static void move(int dirNum, int dis){
-        int tmpX = curX; int tmpY = curY;
-        while (dis-->0){
-            tmpX = tmpX+dx[dirNum];
-            tmpY = tmpY+dy[dirNum];
-            if (!inRange(tmpX,tmpY)||arr[tmpX][tmpY]==0) return;
+        if (canGo(dirNum,dis)){
+            curX += dx[dirNum]*dis;
+            curY += dy[dirNum]*dis;
         }
-        curX = tmpX;
-        curY = tmpY;
+    }
+    
+    private static boolean canGo(int dirNum, int dis){
+        int nx = curX, ny = curY;
+        for (int i = 0; i < dis; i++) {
+            nx += dx[dirNum];
+            ny += dy[dirNum];
+            if (!inRange(nx, ny) || arr[nx][ny] == 0) return false;
+        }
+        return true;
     }
     
     private static boolean inRange(int x, int y){
