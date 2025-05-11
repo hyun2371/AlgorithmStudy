@@ -3,19 +3,28 @@ class Solution {
     public String solution(String s, String skip, int index) {
         
         StringBuilder sb = new StringBuilder();
-
-        for (int i=0;i<s.length();i++){
-            sb.append(convert(s.charAt(i),skip,index));
+        Set<Character> skipSet = new HashSet();
+        for (char c : skip.toCharArray()){
+            skipSet.add(c);
         }
+        
+        for (char c : s.toCharArray()){
+            sb.append(convert(c, skipSet, index));
+        }        
+        
         return sb.toString();
     }
     
-    private static char convert(char c, String skip, int index){
-        while (index-->0){
+    private static char convert(char c, Set<Character> skipSet, int index){
+        int cnt = 0;
+        while (cnt<index){
             c = (char)(c+1);
-            if (c>'z') c = 'a';
-            if (skip.contains(String.valueOf(c))) index++;
+            if (c>'z') c='a';
+            if (skipSet.contains(c)) continue;
+            cnt++;
         }
         return c;
+        
     }
+
 }
