@@ -16,7 +16,7 @@ public class Main {
         }
 
         for (int i=6;i<=n;i++){
-            d[i] = d[i-5]+d[i-2]+d[i-1];
+            d[i] = (d[i-5]+d[i-2]+d[i-1])%10007;
         }
         System.out.println(d[n]);
     }
