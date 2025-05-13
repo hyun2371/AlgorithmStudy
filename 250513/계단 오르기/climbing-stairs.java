@@ -10,7 +10,7 @@ public class Main {
         }
         d[2] = 1; d[3]=1;
         for (int i=4;i<=N;i++){
-            d[i] = Math.max(d[i-2],d[i-3])+1;
+            d[i] = d[i-2]+d[i-3];
         }
         
         System.out.println(d[N]);
