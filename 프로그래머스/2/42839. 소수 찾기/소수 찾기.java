@@ -1,36 +1,46 @@
 import java.util.*;
-
 class Solution {
-    static boolean[] vis;
-    static Set<Integer> set;
+    static Set<Integer> set = new HashSet<>();
+    static int N;
+    static String s,tmp = "";
+    static boolean[] visited;
     
     public int solution(String numbers) {
-        int answer = 0;
-        set = new HashSet<>();
-        vis = new boolean[numbers.length()];
-        DFS(numbers,"",0);
-        for (Integer x : set){
-            if (isPrime(x)) answer++;
-        }
-        return answer;
-    }
-    
-    private static void DFS(String numbers, String s,int lv){
-        if (lv==numbers.length()) return;
+        s = numbers;
+        N = numbers.length();
+        visited = new boolean[N];
         
-        for (int i=0;i<numbers.length();i++){
-            if (vis[i]) continue;
-            vis[i] = true;
-            set.add(Integer.parseInt(s+numbers.charAt(i)));
-            DFS(numbers, s+numbers.charAt(i),lv+1);
-            vis[i] = false;
+        for (int len=1;len<=N;len++){//만들 숫자 길이
+            DFS(0,len);
+        }
+        
+        int cnt = 0;
+        for (int x : set){
+            if(isPrime(x)) cnt++;
+        }
+        return cnt;
+    }
+    
+    private static void DFS(int lv, int len){
+        if (lv==len){
+            if (!tmp.equals(""))
+                set.add(Integer.valueOf(tmp));
+            return;
+        }
+        for (int i=0;i<N;i++){
+            if (visited[i]) continue;
+            visited[i] = true;
+            tmp += s.charAt(i);
+            DFS(lv+1,len);
+            visited[i] = false;
+            tmp = tmp.substring(0,tmp.length()-1);
         }
     }
     
-    private static boolean isPrime(int N){
-        if (N<2) return false;
-        for (int i=2;i<=Math.sqrt(N);i++){
-            if (N%i==0) return false;
+    private static  boolean isPrime(int x){
+        if (x<2) return false;
+        for (int i=2;i<=Math.sqrt(x);i++){
+            if (x%i==0) return false;
         }
         return true;
     }
