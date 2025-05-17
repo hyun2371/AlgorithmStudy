@@ -38,7 +38,7 @@ public class Main {
                 for (int j=i;j<l2;j++){
                      d[0][j] = 1;
                 }
-                break;  
+                return;  
             }
             d[0][i] = 0;
         }
@@ -48,10 +48,10 @@ public class Main {
         char key = s2.charAt(0);
         for (int i=0;i<l1;i++){
             if (key==s1.charAt(i)){
-                for (int j=i;j<l2;j++){
+                for (int j=i;j<l1;j++){
                      d[j][0] = 1;
                 }
-                break;  
+                return;
             }
             d[i][0] = 0;
         }
