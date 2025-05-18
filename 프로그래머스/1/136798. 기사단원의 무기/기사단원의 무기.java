@@ -21,16 +21,9 @@ class Solution {
     private static int getCnt(int n){
         int cnt = 0;
         for (int i=1;i<=Math.sqrt(n);i++){
-            if (n%i==0){
-                cnt++;
-                if (i!=n/i) cnt++;
-            }
+           if (i * i == n) cnt++;
+            else if (n % i == 0) cnt += 2;
         }
         return cnt;
     }
 }
-/*
-공격력-> 약수의 개수
-공격력 > limit -> 공격력 = power
-공격력 총합
-*/
