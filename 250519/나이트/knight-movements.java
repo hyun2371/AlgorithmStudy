@@ -13,6 +13,9 @@ public class Main {
         int r2 = sc.nextInt()-1;
         int c2 = sc.nextInt()-1;
         
+        if (r1==r2&&c1==c2) {
+            System.out.println(0); return;
+        }
         graph = new int[N][N];
         for (int i =0;i<N;i++){
             Arrays.fill(graph[i],-1);
