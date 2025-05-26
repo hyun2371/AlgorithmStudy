@@ -48,7 +48,11 @@ public class Main {
 
         StringBuilder sb = new StringBuilder();
         for (int i=2;i<=N;i++){
-           sb.append(dis[i]).append("\n");
+            if (dis[i]==Integer.MAX_VALUE)
+                sb.append(-1);
+            else
+                sb.append(dis[i]);
+            sb.append("\n");
         }
         System.out.println(sb);
 
