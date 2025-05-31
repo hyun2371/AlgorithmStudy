@@ -3,7 +3,6 @@ import java.util.*;
 public class Main {
     static int N,M;
     static int[][] a;
-    static char dir;
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         N = sc.nextInt();
@@ -16,9 +15,9 @@ public class Main {
         
         for (int i = 0; i < T; i++) {
             int rowInd = sc.nextInt()-1;
-            dir = sc.next().charAt(0);
+            char dir = sc.next().charAt(0);
             
-            elect(rowInd);
+            elect(rowInd, dir);
         }
 
         for (int i=0;i<N;i++){
@@ -27,46 +26,48 @@ public class Main {
             }
             System.out.println();
         }
-
     }
 
-    private static void elect(final int rowInd){
-        move(a[rowInd]); //현재행 전파
-        char tmpDir = dir;
+    private static void elect(final int rowInd, final char dir){
+        move(a[rowInd],dir); //현재행 전파
         int curInd = rowInd-1;
+        char curDir = flipDir(dir);
         
         while (curInd>=0){ //1,0 현재행 위 전파
-            if (equalRowExists(a[curInd],a[curInd+1]))
-                move(a[curInd]);
+            if (hasSameNumber(a[curInd],a[curInd+1])){
+                move(a[curInd],curDir);
+                curDir = flipDir(curDir);
+            }
+            else break;
             curInd--;
         }
 
         curInd = rowInd+1;
-        dir = tmpDir;
+        curDir = flipDir(dir);
         while (curInd<N){ //3,4,5 현재행 아래 전파
-            if (equalRowExists(a[curInd],a[curInd-1]))
-                move(a[curInd]);
+            if (hasSameNumber(a[curInd],a[curInd-1])){
+                move(a[curInd],curDir);
+                curDir = flipDir(curDir);
+            }
+            else break;
             curInd++;
         }
     }
 
-    private static boolean equalRowExists(int[] row1, int[] row2){
+    private static char flipDir(char dir){
+        return (dir=='L')? 'R':'L';
+    }
+
+    private static boolean hasSameNumber(int[] row1, int[] row2){
         for (int i=0;i<M;i++){
             if (row1[i]==row2[i]) return true;
         }
         return false;
     }
 
-    private static void move(int[] row){ //전파 후 방향 전환
-        if (dir=='L') {
-            moveR(row);
-            dir = 'R';
-        }
-        else {
-            moveL(row);
-            dir = 'L';
-        }
-        
+    private static void move(int[] row, char dir){ //전파 후 방향 전환
+        if (dir=='L') moveR(row);
+        else  moveL(row);  
     }
 
     private static void moveL(int[] row){
