@@ -9,22 +9,14 @@ public class Main {
         }
         // Please write your code here.
         int[] d = new int[N];
-        if (N==1) {
-            System.out.println(1); return;
-        }
-        d[0] = 1;
 
-        for (int i=1;i<N;i++){
-            int minInd = -1;
-            int minVal = Integer.MAX_VALUE;
-            for (int j=0;j<i;j++){//i이전값들
-                if (arr[j]>arr[i]&&arr[j]<minVal){
-                    minInd = j;
-                    minVal = arr[j];
+        for (int i=0;i<N;i++){
+            d[i] = 1; //기본값
+            for (int j=0;j<i;j++){
+                if (arr[j]>arr[i]){//현재 값보다 큰 값이 앞에 있으면
+                    d[i] = Math.max(d[i],d[j]+1); //이전값 카운트+1값 대입
                 }
             }
-            if (minInd!=-1) d[i] = d[minInd]+1; //
-            else d[i] = 1;
         }
 
         Arrays.sort(d);
