@@ -17,7 +17,7 @@ public class Main {
         int maxTotal=0;
         for (int i=k;i<=maxPos-k;i++){
             int total=0;
-            for (int j=i-3;j<=i+3;j++){
+            for (int j=i-k;j<=i+k;j++){
                 total+=arr[j];
             }
             maxTotal = Math.max(total,maxTotal);
