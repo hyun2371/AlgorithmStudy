@@ -24,9 +24,7 @@ public class Main {
             maxTotal = Math.max(total,maxTotal);
 
         }
-
-
-        System.out.println(Arrays.toString(arr));
+        System.out.println(maxTotal);
        
     }
     
