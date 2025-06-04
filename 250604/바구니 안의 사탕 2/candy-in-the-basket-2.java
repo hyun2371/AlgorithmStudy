@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 public class Main {
     static int MAX_LEN = 100;
     public static void main(String[] args) {
@@ -15,15 +15,19 @@ public class Main {
         }
 
         int maxTotal=0;
-        for (int i=k;i<=maxPos-k;i++){
+        for (int i=0;i<=maxPos;i++){
             int total=0;
             for (int j=i-k;j<=i+k;j++){
-                total+=arr[j];
+                if (j>=0&&j<=maxPos)
+                    total+=arr[j];
             }
             maxTotal = Math.max(total,maxTotal);
+
         }
 
-        System.out.print(maxTotal);
+
+        System.out.println(Arrays.toString(arr));
        
     }
+    
 }
