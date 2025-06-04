@@ -10,7 +10,7 @@ public class Main {
         for (int i = 0; i < n; i++) {
             int cnt = sc.nextInt();
             int pos = sc.nextInt();
-            arr[pos] = cnt;
+            arr[pos] += cnt;
             maxPos = Math.max(maxPos, pos);
         }
 
