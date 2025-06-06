@@ -1,5 +1,5 @@
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class Main {
 	static int N, M, K;
@@ -36,16 +36,16 @@ public class Main {
 			}
 			sb.append(cnt).append("\n");
 		}
-		System.out.println(sb);
+		System.out.print(sb);
 	}
 
 	private static void DFS(int x, int y) {
+		graph[x][y] = 0;
 		for (int i = 0; i < 4; i++) {
 			int nx = x + dx[i];
 			int ny = y + dy[i];
 
 			if (!inRange(nx, ny)||graph[nx][ny]==0) continue;
-			graph[nx][ny]=0;
 			DFS(nx, ny);
 		}
 	}
