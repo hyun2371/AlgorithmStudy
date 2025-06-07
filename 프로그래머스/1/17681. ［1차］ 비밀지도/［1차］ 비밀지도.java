@@ -4,26 +4,16 @@ class Solution {
         
         for (int i=0;i<n;i++){
             StringBuilder sb = new StringBuilder();
-            String s1 = toBinaryString(arr1[i],n); //01001
-            String s2 = toBinaryString(arr2[i],n); //11110
-            for (int j=0;j<n;j++){
-                int b1 = s1.charAt(j)-'0';
-                int b2 = s2.charAt(j)-'0';
-                int result = b1|b2;
-                String tmp = result==1?"#":" ";
+            String s = Integer.toBinaryString(arr1[i]|arr2[i]);
+            while (s.length()!=n) s="0"+s;
+
+            for (int j=0;j<s.length();j++){
+                String tmp = s.charAt(j)=='1'?"#":" ";
                 sb.append(tmp);
             }
             answer[i] = sb.toString();      
         }
         
         return answer;
-    }
-    
-    private static String toBinaryString(int num, int n){
-        String s = Integer.toBinaryString(num);
-        while (s.length()!=n){
-            s = "0"+s;
-        }
-        return s;
     }
 }
