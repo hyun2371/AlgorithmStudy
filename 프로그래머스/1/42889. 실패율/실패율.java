@@ -1,10 +1,11 @@
 import java.util.*;
+
 class Solution {
     public int[] solution(int N, int[] stages) {
         
-        //스테이지별 클리어 횟수 구하기
-        int[] clearCnts = new int[N+2]; //1-based 1~N+1
-        for (int x : stages) clearCnts[x]++;
+        //스테이지별 잔류 횟수 구하기
+        int[] cnts = new int[N+2]; //1-based 1~N+1
+        for (int x : stages) cnts[x]++;
     
         //스테이지별 실패율 구하기
         List<Failure> failures = new ArrayList<>();
@@ -15,10 +16,10 @@ class Solution {
                 failures.add(new Failure(i,0));
                 continue;
             }
-            double percent = clearCnts[i]*1.0/total;
+            double percent = cnts[i]*1.0/total;
             failures.add(new Failure(i,percent));
 
-            total-=clearCnts[i];
+            total-=cnts[i];
         }
         
         int[] answer = new int[N];
