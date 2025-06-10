@@ -3,19 +3,22 @@ class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
         int[] answer = new int[2];
         Set<Integer> remains = new HashSet<>();
-        
         int zCnt = 0; //0개수
+        int correctCnt = 0;
+        
         for (int lotto:lottos){
             if (lotto==0) zCnt++;
-            else remains.add(lotto); //set에 로또 번호 추가
+            else remains.add(lotto);
         }
         
         for (int key:win_nums){
-            if (remains.contains(key)) remains.remove(key); //번호 맞추면 제거
+            if (remains.contains(key)) {
+                correctCnt++;
+            }
         }
         
-        answer[0] = getRank(6-remains.size()); //최고
-        answer[1] = getRank(6-remains.size()-zCnt);  //최저
+        answer[0] = getRank(correctCnt+zCnt); //최고
+        answer[1] = getRank(correctCnt);  //최저
         
         return answer;
     }
