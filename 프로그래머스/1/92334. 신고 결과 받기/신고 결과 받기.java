@@ -18,7 +18,6 @@ class Solution {
             User reporter = users.get(reporterIdx);
             User target = users.get(targetIdx);
             
-            if (target.beReported.contains(reporterIdx)) continue; //중복 불가
             target.beReported.add(reporterIdx); 
             reporter.report.add(targetIdx);
             
@@ -42,6 +41,6 @@ class Solution {
 }
 
 class User {
-    List<Integer> report = new ArrayList<>();
-    List<Integer> beReported = new ArrayList<>();
+    Set<Integer> report = new HashSet<>();
+    Set<Integer> beReported = new HashSet<>();
 }
