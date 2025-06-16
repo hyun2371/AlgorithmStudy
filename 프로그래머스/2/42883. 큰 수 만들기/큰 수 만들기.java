@@ -13,6 +13,7 @@ class Solution {
             }
             stk.push(cur);
         }
+        while (k-->0) stk.pop();
         
         StringBuilder sb = new StringBuilder();
 
@@ -20,6 +21,6 @@ class Solution {
             sb.append(c);
         }
         
-        return sb.substring(0,sb.length()-k);
+        return sb.toString();
     }
 }
