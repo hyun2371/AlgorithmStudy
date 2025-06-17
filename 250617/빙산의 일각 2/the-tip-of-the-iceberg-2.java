@@ -26,13 +26,16 @@ public class Main {
     static int getCnt(int limit){
         int cnt = 0;
         boolean isPrevUp = false;
+        boolean isNowUp = false;
+        
         for (int i=0;i<n;i++){
-            // 예전에 잠기지 않음& 지금 잠김
-            if (isPrevUp&&h[i]<=limit){
+            if (h[i]>limit) isNowUp = true;
+            else isNowUp = false;
+            
+            if (isPrevUp&&!isNowUp){
                 cnt++;
             }
-            if (h[i]>limit) isPrevUp = true;
-            else isPrevUp = false;
+            isPrevUp = isNowUp;
         }
         if (isPrevUp) cnt++;
         return cnt;
