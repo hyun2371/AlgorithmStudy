@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
     static int[] cnt;
@@ -10,7 +10,8 @@ public class Main {
         int answer =0;
         for (int num=x;num<=y;num++){
             initCnt(num);
-            if (getDiffCnt()==1) answer++;
+            if (isFunNum()) answer++;
+            // System.out.println(num+" "+isFunNum());
         }
         System.out.println(answer);
     }
@@ -23,11 +24,17 @@ public class Main {
         }
     }
 
-    private static int getDiffCnt(){
-        int diffCnt = -1;
+    private static boolean isFunNum(){
+        int chance = 2;
+        boolean isLocked = false;
         for (int v : cnt){
-            if (v>0) diffCnt++;
+            if (v>0) {
+                if (chance==0) return false;
+                if (v>1&&isLocked) return false;
+                if (v>1) isLocked = true;
+                chance--;
+            }
         }
-        return diffCnt;
+        return chance==0;
     }
 }
