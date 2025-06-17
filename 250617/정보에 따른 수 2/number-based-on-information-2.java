@@ -9,7 +9,6 @@ public class Main {
         int a = sc.nextInt();
         int b = sc.nextInt();
 
-        
         for (int i = 0; i < T; i++) {
             char alpha = sc.next().charAt(0);
             int x = sc.nextInt();
@@ -29,25 +28,16 @@ public class Main {
     private static void getDis(int k){
         minDis1 = Integer.MAX_VALUE;
         minDis2 = Integer.MAX_VALUE;
-        boolean isLocked1 = false, isLocked2 = false;
         for (int i=0;i<lst.size();i++){
             Pos p = lst.get(i);
             if (p.alpha=='S'){
                 int dis1 = Math.abs(p.x-k);
-                if (minDis1>dis1){
-                    minDis1 = dis1;
-                } else {
-                    isLocked1 = true;
-                }
+                minDis1 = Math.min(minDis1, dis1);
+               
             } else{
                 int dis2 = Math.abs(p.x-k);
-                if (minDis2>dis2){
-                    minDis2 = dis2;
-                } else {
-                    isLocked2 = true;
-                }
+                minDis2 = Math.min(minDis2, dis2);
             }
-            if (isLocked1&&isLocked2) return;
         }
         
     }
