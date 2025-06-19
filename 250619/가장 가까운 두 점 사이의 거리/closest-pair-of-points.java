@@ -9,11 +9,11 @@ public class Main {
             x[i] = sc.nextInt();
             y[i] = sc.nextInt();
         }
-        double answer = 0;
+        double answer = Integer.MAX_VALUE;
         for (int i=0;i<n;i++){
             for (int j=0;j<n;j++){
                 if (i==j) continue;
-                answer =Math.max(Math.pow(x[i]-x[j],2) + Math.pow(y[i]-y[j],2),answer);
+                answer =Math.min(Math.pow(x[i]-x[j],2) + Math.pow(y[i]-y[j],2),answer);
             }
         }
 
