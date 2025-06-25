@@ -20,14 +20,14 @@ public class Main {
             if (isSerial(arr[r])) answer++;
         }
         
+        int[] line = new int[N];
         for (int c=0;c<N;c++){
-            int[] line = new int[N];
             for (int r =0;r<N;r++){
                 line[r] = arr[r][c];
             }
             if (isSerial(line)) answer++;
         }
-
+        
         System.out.println(answer);
     }
 
