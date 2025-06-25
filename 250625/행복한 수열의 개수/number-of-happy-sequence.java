@@ -27,17 +27,19 @@ public class Main {
             }
             if (isSerial(line)) answer++;
         }
+
         System.out.println(answer);
     }
 
     private static boolean isSerial(int[] line){
-        int cnt = 0, tmp =-1;
-        for (int i=0;i<N;i++){
-            if (line[i]!=tmp){
-                tmp = line[i];
+        if (M==1) return true;
+        int cnt = 1;
+        for (int i=1;i<N;i++){
+            if (line[i]==line[i-1]){
+                cnt++;
                 if (cnt>=M) return true;
             }
-            else cnt++;
+            else cnt = 1;
         }
         return false;
     }
