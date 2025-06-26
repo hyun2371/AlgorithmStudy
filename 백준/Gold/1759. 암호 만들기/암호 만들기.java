@@ -2,56 +2,44 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-	static int L,C;
-	static char[] arr, ans;
-	static boolean[] vis;
+	static int N,M,moCnt,jaCnt;
+	static char[] arr,ans;
 	static StringBuilder sb = new StringBuilder();
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	static Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new java.io.InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer(br.readLine());
-		L = Integer.parseInt(st.nextToken()); //정답 길이
-		C = Integer.parseInt(st.nextToken()); //주어진 수 개수
 
-		arr = new char[C];
-		vis = new boolean[C];
-		ans = new char[L];
-
+		M = Integer.parseInt(st.nextToken());
+		N = Integer.parseInt(st.nextToken());
+		arr = new char[N];
+		ans = new char[M];
 		st = new StringTokenizer(br.readLine());
-		for (int i = 0; i < C; i++) {
+		for (int i = 0; i < N; i++) {
 			arr[i] = st.nextToken().charAt(0);
 		}
 		Arrays.sort(arr);
-
-		DFS(0);
+		DFS(0,0);
 		System.out.println(sb);
-		String s = "aiou";
 	}
-
-	static void DFS(int lv){
-		if (lv==L){
-			if (!satisfy(ans)) return;
-			for (char x : ans){
-				sb.append(x);
+	
+	private static void DFS(int lv, int start){
+		if (lv==M){
+			if (jaCnt<2||moCnt<1) return;
+			for (int i = 0; i < M; i++) {
+				sb.append(ans[i]);
 			}
 			sb.append("\n");
 			return;
 		}
-		for (int i = 0; i < C; i++) {
-			if (vis[i]) continue;
-			if (lv>0&&ans[lv-1]>arr[i]) continue; // 오름차순
-			ans[lv] = arr[i];
-			vis[i] = true;
-			DFS(lv+1);
-			vis[i] = false;
-		}
-	}
 
-	static boolean satisfy(char[] ans){
-		int jCnt = 0, mCnt = 0;
-		for (char x : ans){
-            if (x=='a'||x=='e'||x=='i'||x=='o'||x=='u') mCnt++;
-            else jCnt++;
+		for (int i = start; i < N; i++) {
+			if (set.contains(arr[i])) moCnt++;
+			else jaCnt++;
+			ans[lv] = arr[i];
+			DFS(lv+1,i+1);
+			if (set.contains(arr[i])) moCnt--;
+			else jaCnt--;
 		}
-		return mCnt >= 1 && jCnt >= 2;
 	}
 }
