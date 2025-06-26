@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-	static int N,M,moCnt,jaCnt;
+	static int N,M;
 	static char[] arr,ans;
 	static StringBuilder sb = new StringBuilder();
 	static Set<Character> set = new HashSet<>(Arrays.asList('a', 'e', 'i', 'o', 'u'));
@@ -19,11 +19,11 @@ public class Main {
 			arr[i] = st.nextToken().charAt(0);
 		}
 		Arrays.sort(arr);
-		DFS(0,0);
+		DFS(0,0,0,0);
 		System.out.println(sb);
 	}
 	
-	private static void DFS(int lv, int start){
+	private static void DFS(int lv, int start, int moCnt, int jaCnt){
 		if (lv==M){
 			if (jaCnt<2||moCnt<1) return;
 			for (int i = 0; i < M; i++) {
@@ -34,12 +34,10 @@ public class Main {
 		}
 
 		for (int i = start; i < N; i++) {
-			if (set.contains(arr[i])) moCnt++;
-			else jaCnt++;
 			ans[lv] = arr[i];
-			DFS(lv+1,i+1);
-			if (set.contains(arr[i])) moCnt--;
-			else jaCnt--;
+			if (set.contains(arr[i]))
+				DFS(lv+1, i+1, moCnt+1, jaCnt);
+			else DFS(lv+1, i+1, moCnt, jaCnt+1);
 		}
 	}
 }
