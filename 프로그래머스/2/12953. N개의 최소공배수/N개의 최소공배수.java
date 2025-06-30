@@ -1,46 +1,16 @@
-import java.util.*;
 class Solution {
-    static int[] cnt = new int[100];
     public int solution(int[] arr) {
-        
+        int answer = 1;
+        //answer와 num의 최대 공약수 제외하고 answer에 곱해줌
         for (int num : arr){
-            putCnt(num);
+            int g = gcd(Math.max(num, answer), Math.min(num,answer));
+            answer = answer * (num/g);
         }
-        
-       int answer = 1;
-       for (int i=1;i<100;i++){
-           if (cnt[i]>0) {
-               answer*=(int)Math.pow(i,cnt[i]);
-           }
-       }
         return answer;
     }
     
-    private static void putCnt(int num){
-        int[] tmp = new int[100];
-        while (num!=1){
-            for (int i=2;i<=num;i++){
-                if (!isPrime(i)) continue;
-                if (num%i==0) {
-                    tmp[i]++;
-                    num/=i;
-                }
-            }
-        }
-        
-        for (int i=1;i<100;i++){
-            if (tmp[i]>0){
-                cnt[i] = Math.max(cnt[i],tmp[i]);
-            }
-        }
-        
-    }
-    
-    private static boolean isPrime(int n){
-        if (n==1) return true;
-        for (int i=2;i<=Math.sqrt(n);i++){
-            if (n%i==0) return false;
-        }
-        return true;
+    private int gcd(int a, int b){
+        if (b==0) return a;
+        return gcd(b,a%b);
     }
 }
