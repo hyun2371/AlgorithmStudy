@@ -13,7 +13,7 @@ class Solution {
             // cache hit
             if (deq.contains(key)){ 
                 deq.remove(key);
-                deq.addFirst(key); // 맨 뒤에 있어야지 늦게 나옴
+                deq.addFirst(key);
                 totalTime+=HIT_TIME;
                 continue;
             }
