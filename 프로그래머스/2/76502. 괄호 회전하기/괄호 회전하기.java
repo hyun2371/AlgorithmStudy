@@ -2,14 +2,9 @@ import java.util.*;
 class Solution {
     public int solution(String s) {
         int cnt = 0;
-        StringBuilder sb = new StringBuilder(s);
         for (int i=0;i<s.length();i++){
-            sb = new StringBuilder(sb);
-            String tmp = sb.substring(0,1);
-            sb.deleteCharAt(0);
-            sb.append(tmp);
-            if (isValid(sb.toString())) cnt++;
-            s = sb.toString();
+            if (isValid(s)) cnt++;
+            s = s.substring(1)+s.charAt(0);
         }
     
         return cnt;
