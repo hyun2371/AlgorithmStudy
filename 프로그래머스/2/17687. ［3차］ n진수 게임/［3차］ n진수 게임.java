@@ -33,22 +33,14 @@ class Solution {
     
     //num을 n진수로 변환
     private static String convert(int num, int n){
+        char[] cArr = {'0','1','2','3','4','5','6','7','8','9',
+                      'A','B','C','D','E','F'};
         StringBuilder sb = new StringBuilder();
        
         while (num!=0){
-            sb.append(getKey(num%n));
+            sb.append(cArr[num%n]);
             num/=n;
         }
         return sb.reverse().toString();
-    }
-    
-    // 10진수 넘어가면 알파벳 변환
-    private static char getKey(int key){
-        Map<Integer, Character> map = new HashMap<>();
-        map.put(10,'A'); map.put(11,'B'); map.put(12,'C');
-        map.put(13,'D'); map.put(14,'E'); map.put(15,'F');
-        
-        
-        return map.getOrDefault(key,(char)(key+'0'));
     }
 }
