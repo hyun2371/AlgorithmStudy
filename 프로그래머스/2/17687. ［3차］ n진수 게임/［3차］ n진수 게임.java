@@ -20,7 +20,8 @@ class Solution {
         boolean flag = false;
         
         while (true){
-            String s = convert(num++,n);
+            // String s = convert(num++,n);
+            String s = Integer.toString(num++,n).toUpperCase();
             for (int i=0;i<s.length();i++){
                 if (ind>m*t) { //배열 길이만큼 구하기
                     flag = true; break;
@@ -29,18 +30,5 @@ class Solution {
             }
             if (flag) break;
         }
-    }
-    
-    //num을 n진수로 변환
-    private static String convert(int num, int n){
-        char[] cArr = {'0','1','2','3','4','5','6','7','8','9',
-                      'A','B','C','D','E','F'};
-        StringBuilder sb = new StringBuilder();
-       
-        while (num!=0){
-            sb.append(cArr[num%n]);
-            num/=n;
-        }
-        return sb.reverse().toString();
     }
 }
