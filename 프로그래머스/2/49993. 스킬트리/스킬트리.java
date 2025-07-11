@@ -12,8 +12,8 @@ class Solution {
         int pointer = 0;
         
         for (char t: tree.toCharArray()){
-            if (skill.contains(t+"")){ //선행 스킬 트리에 있을 경우
-                if (t==skill.charAt(pointer)) pointer++; //pointer가 가리키는 스킬이 존재해야함
+            if (skill.indexOf(t)!=-1){ //선행 스킬 트리에 존재할 경우
+                if (t==skill.charAt(pointer)) pointer++; //pointer가 가리키는 스킬이어야함
                 else return false;
             }
         }
