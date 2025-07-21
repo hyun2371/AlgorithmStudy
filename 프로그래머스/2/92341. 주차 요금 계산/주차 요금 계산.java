@@ -6,56 +6,54 @@ class Solution {
         for (String record: records){
             String[] data = record.split(" ");
             
-            String time = data[0];
-            int hour = Integer.valueOf(time.split(":")[0]);
-            int min = Integer.valueOf(time.split(":")[1]);
+            String[] time = data[0].split(":");
+            int hour = Integer.valueOf(time[0]);
+            int min = Integer.valueOf(time[1]);
             
             String carNum = data[1];
             String cmd = data[2];
-            if (cmd.equals("IN")&&!map.containsKey(carNum)){
-                map.put(carNum,new Car(hour,min)); continue;
+            if (!map.containsKey(carNum)){
+                map.put(carNum,new Car());
             } 
             
             Car car = map.get(carNum);
-            if (cmd.equals("OUT")){
-                car.out(hour,min);
+            if (cmd.equals("IN")){
+                car.entry(hour,min);
             }
             else {
-                car.entry(hour,min);
+                car.out(hour,min);
             }
             
         }
         
         int[] answer = new int[map.size()];
-
-        int defaultMin = fees[0];
-        int defaultFee = fees[1];
-        int overMin = fees[2];
-        int overFee = fees[3];
         int idx = 0;
         for (Car car:map.values()){
-            int totalTime = car.getTotalTime();
-            if (totalTime<=defaultMin) answer[idx++] = defaultFee;
-            else 
-            answer[idx++] = defaultFee+
-                (int)Math.ceil((totalTime-defaultMin*1.0)/overMin)*overFee;
+            answer[idx++] = calculateFee(fees, car);
         }
         
         return answer;
     }
+    
+    private int calculateFee(int[] fees, Car car){
+        int defaultMin = fees[0];
+        int defaultFee = fees[1];
+        int overMin = fees[2];
+        int overFee = fees[3];
+
+        int totalTime = car.getTotalTime();
+
+        if (totalTime<=defaultMin) return defaultFee;
+        else 
+            return defaultFee+(int)Math.ceil((totalTime-defaultMin)*1.0/overMin)*overFee;
+    }
 }
 
 class Car {
-    boolean isEntry = false; //입차 여부
+    boolean isEntry; //입차 여부
     int entryHour; //입차 시간
     int entryMin; //입차 분
     int totalTime = 0;
-    
-    public Car(int entryHour, int entryMin){ //최초 입차
-        this.entryHour = entryHour;
-        this.entryMin = entryMin;
-        isEntry = true;
-    }
     
     public void entry(int entryHour, int entryMin){//입차
         this.entryHour = entryHour;
