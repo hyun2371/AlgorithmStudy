@@ -1,42 +1,37 @@
 import java.util.*;
 class Solution {
     public int[] solution(String msg) {
+        Map<String, Integer> dict = new HashMap<>();
         List<Integer> output = new ArrayList<>();
-        Map<String, Integer> map  = new HashMap<>();
-        initMap(map);
+        initDict(dict);     
+        int curIdx = 0, dictIdx=27;
         
-        int mapNum =27, curInd = 0;
-        
-        while (curInd<msg.length()){
-            String w = ""+msg.charAt(curInd); //현재 단어
-            int nextInd = curInd+1;
-            
-            while (nextInd<=msg.length()&&map.containsKey(msg.substring(curInd,nextInd))){ // 단어가 사전에 있을 때까지
-                w = msg.substring(curInd,nextInd);
-                nextInd++;
+        while (curIdx<msg.length()){
+            int nextIdx = curIdx+1;
+            String w = ""+msg.charAt(curIdx);
+            while (nextIdx<=msg.length()&&dict.containsKey(msg.substring(curIdx,nextIdx))){          
+                w = msg.substring(curIdx,nextIdx);
+                nextIdx++;
             }
+            output.add(dict.get(w)); // 기존 단어 찾기
             
-            output.add(map.get(w)); //사전에서 반환
-            
-            if (nextInd<=msg.length()){
-                String wc = msg.substring(curInd,nextInd);
-                map.put(wc,mapNum++);
-            }
-            curInd += w.length();
-            
+            if (nextIdx<=msg.length()) 
+                dict.put(msg.substring(curIdx,nextIdx),dictIdx++); //새로운 단어 추가
+            curIdx += w.length();
         }
         
         int[] answer = new int[output.size()];
         for (int i=0;i<output.size();i++){
             answer[i] = output.get(i);
         }
+        
         return answer;
     }
     
-    private static void initMap(Map<String, Integer> map){
-        int mapInd=1;
-        for (char ch = 'A';ch<='Z';ch++){
-            map.put(String.valueOf(ch),mapInd++);
+    private static void initDict(Map<String, Integer> dict){
+        int dictIdx = 1;
+        for (char c = 'A';c<='Z';c++){
+            dict.put(c+"",dictIdx++);
         }
     }
 }
