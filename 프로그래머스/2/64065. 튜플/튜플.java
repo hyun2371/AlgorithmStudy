@@ -8,14 +8,9 @@ class Solution {
             map.put(x,map.getOrDefault(x,0)+1);
         }
         
-        List<Map.Entry<String, Integer>> entryList = new ArrayList<>(map.entrySet());
-        entryList.sort(Map.Entry.comparingByValue());
-        
         int[] answer = new int[map.size()];
-        int ind = map.size()-1;
-
-        for (Map.Entry<String, Integer> entry : entryList) {
-			answer[ind--] = Integer.parseInt(entry.getKey());
+        for (String key: map.keySet()) {
+			answer[map.size()-map.get(key)] = Integer.parseInt(key);
 		}
 
         return answer;
