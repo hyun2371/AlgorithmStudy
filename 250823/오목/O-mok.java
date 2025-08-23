@@ -15,6 +15,7 @@ public class Main {
         
         for (int i = 0; i < 19; i++) {
             for (int j = 0; j < 19; j++) {
+                if (arr[i][j]==0) continue;
                 for (int d=0;d<8;d++){
                     int cnt = 1;
                     int cx = i, cy = j;
