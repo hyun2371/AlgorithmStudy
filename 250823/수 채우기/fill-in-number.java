@@ -16,6 +16,7 @@ public class Main {
         }
         
         cnt+=num/2;
+        if (num%2!=0) cnt = -1;
         System.out.println(cnt);
     }
 }
