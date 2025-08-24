@@ -1,28 +1,28 @@
 import java.util.*;
-
 class Solution {
-    private static int HIT_TIME=1,MISS_TIME=5;
+    static final int HIT_TIME = 1, MISS_TIME = 5;
     public int solution(int cacheSize, String[] cities) {
-        int totalTime = 0;
-        Deque<String> deq = new LinkedList<>();
+        if (cacheSize==0) return cities.length*MISS_TIME;
         
-        if (cacheSize==0) return MISS_TIME*cities.length;
+        // 캐시 초기화
+        Deque<String> dq = new LinkedList<>();
+        int time = 0;
         
-        for (int i=0;i<cities.length;i++){
-            String key = cities[i].toUpperCase();
-            // cache hit
-            if (deq.contains(key)){ 
-                deq.remove(key);
-                deq.addFirst(key);
-                totalTime+=HIT_TIME;
-                continue;
+        
+        for (String city:cities){
+            String key = city.toLowerCase();
+            if (dq.contains(key)){ //캐시 hit
+                dq.remove(key);
+                dq.addLast(key);
+                time+=HIT_TIME;
+            } else {//캐시 miss
+                if (dq.size()>=cacheSize){
+                    dq.removeFirst(); //기존꺼 제거
+                }
+                dq.addLast(key);
+                time+=MISS_TIME;
             }
-            //cache miss
-            if (deq.size()==cacheSize) deq.removeLast();
-            deq.addFirst(key);
-            totalTime+=MISS_TIME;
         }
-        
-        return totalTime;
+        return time;
     }
 }
