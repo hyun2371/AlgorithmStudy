@@ -5,21 +5,21 @@ class Solution {
         if (cacheSize==0) return cities.length*MISS_TIME;
         
         // 캐시 초기화
-        Deque<String> dq = new LinkedList<>();
+        List<String> lst = new LinkedList<>();
         int time = 0;
         
         
         for (String city:cities){
             String key = city.toLowerCase();
-            if (dq.contains(key)){ //캐시 hit
-                dq.remove(key);
-                dq.addLast(key);
+            if (lst.contains(key)){ //캐시 hit
+                lst.remove(key);
+                lst.add(key);
                 time+=HIT_TIME;
             } else {//캐시 miss
-                if (dq.size()>=cacheSize){
-                    dq.removeFirst(); //기존꺼 제거
+                if (lst.size()>=cacheSize){
+                    lst.remove(0); //기존꺼 제거
                 }
-                dq.addLast(key);
+                lst.add(key);
                 time+=MISS_TIME;
             }
         }
