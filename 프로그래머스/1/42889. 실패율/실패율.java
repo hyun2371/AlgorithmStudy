@@ -4,15 +4,19 @@ class Solution {
     public int[] solution(int N, int[] stages) {
         List<Rate> rates = new ArrayList<>();
         double failRate;
-        for (int i=1;i<=N;i++){//단계
-            int visitCnt =0, stopCnt = 0;
-            for (int cnt: stages){
-                if (cnt>=i) visitCnt++;
-                if (cnt==i) stopCnt++;
-            }
+        
+        int[] stopCnt = new int[N+2];
+        for (int stage:stages){
+            stopCnt[stage]++;
+        }
+        System.out.println(Arrays.toString(stopCnt));
+        
+        int visitCnt = stages.length;
+        for (int i=1;i<=N;i++){
             if (visitCnt==0) failRate = 0;
-            else failRate = (double)stopCnt/visitCnt;
+            else failRate = (double)stopCnt[i]/visitCnt;
             rates.add(new Rate(i,failRate));
+            visitCnt-=stopCnt[i];
         }
         Collections.sort(rates);
         
@@ -36,7 +40,7 @@ class Rate implements Comparable<Rate>{
     public int compareTo(Rate o){
         if (o.failRate==this.failRate)
             return this.stageNo-o.stageNo;
-        if (o.failRate>this.failRate) return 1;
-        else return -1;
+        return Double.compare(o.failRate, this.failRate);
+
     }
 }
