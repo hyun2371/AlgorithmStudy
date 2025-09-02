@@ -1,24 +1,22 @@
 import java.util.*;
 class Solution {
-    
-    static List<String> lst = new ArrayList<>();
-    static StringBuilder sb  = new StringBuilder();
-    static String[] arr = {"A","E","I","O","U"};
+    static int cnt = 0;
+    static char[] mo  = {'A','E','I','O','U'};
+    static boolean flag;
     public int solution(String word) {
-        DFS(0,word);
-        return lst.indexOf(word)+1;
+        DFS(0,"",word);
+        return cnt;
     }
     
-    private static void DFS(int lv,String word){
-        if (lv==5){
+    private static void DFS(int lv, String s, String word){
+        if (flag||lv==mo.length+1) return;
+        if (word.equals(s)) {
+            flag = true;
             return;
         }
-        for (int i=0;i<arr.length;i++){
-            sb.append(arr[i]);
-            lst.add(sb.toString());
-            if (sb.toString().equals(word)) return;
-            DFS(lv+1,word);
-            sb.setLength(sb.length() - 1);
+         cnt++;
+        for (int i=0;i<mo.length;i++){
+            DFS(lv+1,s+mo[i],word);
         }
     }
 }
