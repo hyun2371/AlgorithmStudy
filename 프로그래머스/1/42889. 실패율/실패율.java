@@ -2,52 +2,41 @@ import java.util.*;
 
 class Solution {
     public int[] solution(int N, int[] stages) {
-        
-        //스테이지별 잔류 횟수 구하기
-        int[] cnts = new int[N+2]; //1-based 1~N+1
-        for (int x : stages) cnts[x]++;
-    
-        //스테이지별 실패율 구하기
-        List<Failure> failures = new ArrayList<>();
-        int total = stages.length;
-        
-        for (int i=1;i<=N;i++){ 
-            if (total==0){
-                failures.add(new Failure(i,0));
-                continue;
+        List<Rate> rates = new ArrayList<>();
+        double failRate;
+        for (int i=1;i<=N;i++){//단계
+            int visitCnt =0, stopCnt = 0;
+            for (int cnt: stages){
+                if (cnt>=i) visitCnt++;
+                if (cnt==i) stopCnt++;
             }
-            double percent = cnts[i]*1.0/total;
-            failures.add(new Failure(i,percent));
-
-            total-=cnts[i];
+            if (visitCnt==0) failRate = 0;
+            else failRate = (double)stopCnt/visitCnt;
+            rates.add(new Rate(i,failRate));
         }
+        Collections.sort(rates);
         
         int[] answer = new int[N];
-        
-        Collections.sort(failures);
-        for (int i=0;i<N;i++){
-            Failure failure = failures.get(i);
-            answer[i] = failure.stage;
+        for (int i=0;i<rates.size();i++){
+            answer[i] = rates.get(i).stageNo;
         }
-
+        
         return answer;
     }
 }
-
-class Failure implements Comparable<Failure>{
-    int stage;
-    double percent;
+class Rate implements Comparable<Rate>{
+    int stageNo;
+    double failRate;
     
-    public Failure(int stage, double percent){
-        this.stage = stage;
-        this.percent = percent;
+    public Rate(int stageNo, double failRate){
+        this.stageNo = stageNo;
+        this.failRate = failRate;
     }
     
-    @Override
-    public int compareTo(Failure o){
-        if (this.percent!=o.percent){
-            return Double.compare(o.percent, this.percent);
-        }
-        return this.stage-o.stage;
+    public int compareTo(Rate o){
+        if (o.failRate==this.failRate)
+            return this.stageNo-o.stageNo;
+        if (o.failRate>this.failRate) return 1;
+        else return -1;
     }
 }
