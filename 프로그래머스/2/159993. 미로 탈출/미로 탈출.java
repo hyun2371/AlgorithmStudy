@@ -12,18 +12,14 @@ class Solution {
         
         initMaps(maps);
         int answer = 0;
-        
-        initDis();
+
         int dis1 = BFS(sx,sy,lx,ly);
         if (dis1==-1) return -1;
-        answer+=dis1;
         
-        initDis();
         int dis2 = BFS(lx,ly,ex,ey);
         if (dis2==-1) return -1;
-        answer+=dis2;
         
-        return answer;
+        return dis1+dis2;
     }
     
     private static void initDis(){
@@ -33,11 +29,6 @@ class Solution {
         }
     }
     
-    private static void printDis(){
-        for (int i=0;i<N;i++){
-            System.out.println(Arrays.toString(dis[i]));
-        }
-    }
     private static void initMaps(String[] maps){
         arr = new char[N][M];
         for (int i=0;i<N;i++){
@@ -57,6 +48,7 @@ class Solution {
     }
     
     private static int BFS(int x1, int y1, int x2, int y2){
+        initDis();  
         Queue<Pos> q = new LinkedList<>();
         q.offer(new Pos(x1,y1));
         dis[x1][y1] = 0;
