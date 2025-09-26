@@ -15,22 +15,21 @@ class Solution {
         
         if ((sum1+sum2)%2==1)return -1;
         int cnt = 0;
+        long target = (sum1+sum2)/2;
         int limit = (q1.size()+q2.size())*2;
         while (cnt<limit){
-            if (sum1==sum2) {
+            if (sum1==target) {
                 return cnt;
             }
-            else if (sum1<sum2){
+            else if (sum1<target){
                 int tmp = q2.poll();
                 q1.offer(tmp);
                 sum1+=tmp;
-                sum2-=tmp;
             }
-            else if (sum1>sum2){
+            else if (sum1>target){
                 int tmp = q1.poll();
                 q2.offer(tmp);
                 sum1-=tmp;
-                sum2+=tmp;
             }
             cnt++;
         }
