@@ -2,28 +2,21 @@ import java.util.*;
 class Solution {
     static final int FULL_TIME = 23*60+59;
     public int[] solution(int[] fees, String[] records) {
-        Map<String, Integer> entryTime = new HashMap<>();
         Map<String, Integer> totalTime = new TreeMap<>();
         
         for (int i=0;i<records.length;i++){
             String record = records[i];
-            int time = getTime(record.split(" ")[0]);
+            int time = FULL_TIME-getTime(record.split(" ")[0]);
             String key = record.split(" ")[1];
             String status = record.split(" ")[2];
             
             if (status.equals("IN")){
-                entryTime.put(key,time);
+                totalTime.merge(key,time, Integer::sum
+);
             } else {
-                int remainTime = time-entryTime.get(key);
-                totalTime.put(key,totalTime.getOrDefault(key,0)+remainTime);
-                entryTime.remove(key);
+                totalTime.merge(key,-time, Integer::sum
+);
             }
-        }
-        
-        //fulltime
-        for (String key :entryTime.keySet()){//끝까지 출차 안함
-            int remainTime = FULL_TIME-entryTime.get(key);
-            totalTime.put(key,totalTime.getOrDefault(key,0)+remainTime);
         }
         
         int[] answer = new int[totalTime.size()];
