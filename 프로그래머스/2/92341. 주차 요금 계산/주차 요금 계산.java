@@ -1,75 +1,47 @@
 import java.util.*;
 class Solution {
+    static final int FULL_TIME = 23*60+59;
     public int[] solution(int[] fees, String[] records) {
-
-        Map<String, Car> map = new TreeMap<>(); //차번호, 차
-        for (String record: records){
-            String[] data = record.split(" ");
+        Map<String, Integer> entryTime = new HashMap<>();
+        Map<String, Integer> totalTime = new TreeMap<>();
+        
+        for (int i=0;i<records.length;i++){
+            String record = records[i];
+            int time = getTime(record.split(" ")[0]);
+            String key = record.split(" ")[1];
+            String status = record.split(" ")[2];
             
-            String[] time = data[0].split(":");
-            int hour = Integer.valueOf(time[0]);
-            int min = Integer.valueOf(time[1]);
-            
-            String carNum = data[1];
-            String cmd = data[2];
-            if (!map.containsKey(carNum)){
-                map.put(carNum,new Car());
-            } 
-            
-            Car car = map.get(carNum);
-            if (cmd.equals("IN")){
-                car.entry(hour,min);
+            if (status.equals("IN")){
+                entryTime.put(key,time);
+            } else {
+                int remainTime = time-entryTime.get(key);
+                totalTime.put(key,totalTime.getOrDefault(key,0)+remainTime);
+                entryTime.remove(key);
             }
-            else {
-                car.out(hour,min);
-            }
-            
         }
         
-        int[] answer = new int[map.size()];
-        int idx = 0;
-        for (Car car:map.values()){
-            answer[idx++] = calculateFee(fees, car);
+        //fulltime
+        for (String key :entryTime.keySet()){//끝까지 출차 안함
+            int remainTime = FULL_TIME-entryTime.get(key);
+            totalTime.put(key,totalTime.getOrDefault(key,0)+remainTime);
         }
         
+        int[] answer = new int[totalTime.size()];
+        int ind = 0;
+        for (String key: totalTime.keySet()){
+            answer[ind++] = calculateFee(totalTime.get(key),fees);
+        }
         return answer;
     }
     
-    private int calculateFee(int[] fees, Car car){
-        int defaultMin = fees[0];
-        int defaultFee = fees[1];
-        int overMin = fees[2];
-        int overFee = fees[3];
-
-        int totalTime = car.getTotalTime();
-
-        if (totalTime<=defaultMin) return defaultFee;
-        else 
-            return defaultFee+(int)Math.ceil((totalTime-defaultMin)*1.0/overMin)*overFee;
+    private int getTime(String time){
+        int h = Integer.parseInt(time.split(":")[0]);
+        int m = Integer.parseInt(time.split(":")[1]);
+        return 60*h+m;
     }
-}
 
-class Car {
-    boolean isEntry; //입차 여부
-    int entryHour; //입차 시간
-    int entryMin; //입차 분
-    int totalTime = 0;
-    
-    public void entry(int entryHour, int entryMin){//입차
-        this.entryHour = entryHour;
-        this.entryMin = entryMin;
-        isEntry = true;
-    }
-    
-    public void out(int outHour, int outMin){ //출차
-        totalTime+= (outHour-entryHour)*60+(outMin-entryMin); //주차 시간 누적
-        isEntry = false;
-    }
-    
-    public int getTotalTime(){ //누적시간 반환
-        if (isEntry){//아직 출차 안함
-           totalTime+= (23-entryHour)*60+(59-entryMin);
-        }
-        return totalTime;
+    private int calculateFee(int min, int[] fees){
+        if (min<=fees[0]) return fees[1];
+        return fees[1]+(int) Math.ceil((min-fees[0])/(double)fees[2])*fees[3];
     }
 }
