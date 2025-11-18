@@ -2,59 +2,39 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-	static Set<Character> mSet = new HashSet<>(List.of('a', 'e', 'i', 'o', 'u'));
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String s = br.readLine();
 		StringBuilder sb = new StringBuilder();
+		while (!s.equals("end")) {
+			if (isSatisfied(s)) sb.append("<").append(s).append("> is acceptable.\n");
+			else sb.append("<").append(s).append("> is not acceptable.\n");
+			s = br.readLine();
+		}
+		System.out.print(sb);
+	}
 
-		String s;
-		while (!(s = br.readLine()).equals("end")){
-			boolean isValid = false;
-			sb.append("<").append(s).append(">");
-			if (condition1(s)&&condition2(s)&&condition3(s)){
-				isValid = true;
-			}
-			if (isValid){
-				sb.append(" is acceptable.").append("\n");
+	private static boolean isSatisfied(String s) {
+		Set<Character> set = Set.of('a', 'e', 'i', 'o', 'u');
+		int mCnt = 0, mSerialCnt = 0, jSerialCnt = 0;
+		char prev = '0';
+		for (int i = 0; i < s.length(); i++) {
+			char cur = s.charAt(i);
+			if (set.contains(cur)) {
+				mCnt++;
+				mSerialCnt++;
+				jSerialCnt = 0;
 			} else {
-				sb.append(" is not acceptable.").append("\n");
+				jSerialCnt++;
+				mSerialCnt = 0;
 			}
+			if (jSerialCnt >= 3 || mSerialCnt >= 3)
+				return false;
+			if (cur == prev && cur != 'e' && cur != 'o')
+				return false;
+			prev = cur;
 		}
-
-		System.out.println(sb);
+		return mCnt > 0;
 	}
 
-	private static boolean condition1(String s){
-		for (char c : s.toCharArray()) {
-			if (mSet.contains(c)) return true;
-		}
-		return false;
-	}
-
-	private static boolean condition2(String s){
-		int serialCnt = 1;
-		boolean isM = mSet.contains(s.charAt(0));
-
-		for (int i=1;i<s.length();i++){
-			char cur = s.charAt(i);
-			if ((mSet.contains(cur)&&isM)||(!mSet.contains(cur)&&!isM)){
-				serialCnt++;
-				if (serialCnt==3) return false;
-			}
-			else {
-				serialCnt = 1;
-			}
-			isM = mSet.contains(cur);
-		}
-		return true;
-	}
-
-	private static boolean condition3(String s){
-		for (int i=1;i<s.length();i++){
-			char prev = s.charAt(i-1);
-			char cur = s.charAt(i);
-			if (prev==cur&&cur!='o'&&cur!='e') return false;
-		}
-		return true;
-	}
 }
