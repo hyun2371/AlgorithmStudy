@@ -29,7 +29,8 @@ public class Main {
                 }
             }
         }
-        System.out.print((maxX-minX+1)*(maxY-minY+1));
+        if (minX>maxX) System.out.print(0);
+        else System.out.print((maxX-minX+1)*(maxY-minY+1));
     }
 
     private static void color(int x1, int x2, int y1, int y2, boolean value){
