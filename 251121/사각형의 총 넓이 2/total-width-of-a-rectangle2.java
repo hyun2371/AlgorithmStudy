@@ -16,7 +16,7 @@ public class Main {
         }
        
         int[][] area = new int[201][201];
-        for (int k=0;k<2;k++){
+        for (int k=0;k<n;k++){
             for (int i=x1[k];i<x2[k];i++){
                 for (int j=y1[k];j<y2[k];j++){
                     area[i][j] = 1;
