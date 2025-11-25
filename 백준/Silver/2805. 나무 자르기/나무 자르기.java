@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 
 class Main {
-    //절단기 높이로 나무 길이 얼만큼 얻는지
     public static long sum(int[] arr, int h){
       long sum = 0;
       for (int x : arr){
@@ -11,7 +10,7 @@ class Main {
       return sum;
     }
     public int solution(int[] arr, int k) { 
-      int answer = 0; // 절단기 높이
+      int answer = 0;
       int lt = 0;
       int rt = Arrays.stream(arr).max().getAsInt();
       while (lt<=rt){
@@ -24,7 +23,6 @@ class Main {
               rt = mid-1;
           }
       }
-      
       return answer;
     }
 
@@ -42,7 +40,6 @@ class Main {
         for (int i=0;i<n;i++){
             arr[i] = Integer.parseInt(st.nextToken());
         }
-
         System.out.println(t.solution(arr,k));
     }
 }
