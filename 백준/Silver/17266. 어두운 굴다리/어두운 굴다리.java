@@ -1,33 +1,36 @@
-import java.io.*;
 import java.util.*;
+import java.io.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        
-        int N = Integer.parseInt(br.readLine());
-        int M = Integer.parseInt(br.readLine());
-        
-        int[] arr = new int[M];
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        for (int i = 0; i < M; i++) {
-            arr[i] = Integer.parseInt(st.nextToken());
-        }
-        
-        int ans = 0;
-        
-        // 1. 왼쪽 끝
-        ans = Math.max(ans, arr[0]);
-        
-        // 2. 가로등 사이
-        for (int i = 1; i < M; i++) {
-            int diff = arr[i] - arr[i - 1];
-            ans = Math.max(ans, (diff + 1) / 2);  // 올림 처리
-        }
-        
-        // 3. 오른쪽 끝
-        ans = Math.max(ans, N - arr[M - 1]);
-        
-        System.out.println(ans);
-    }
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		int N = Integer.parseInt(br.readLine()); //굴다리 길이
+		int M = Integer.parseInt(br.readLine()); //가로등 개수
+
+		int[] arr = new int[M];
+		StringTokenizer st = new StringTokenizer(br.readLine());
+
+		for (int i = 0; i < M; i++) {
+			arr[i] = Integer.parseInt(st.nextToken());
+		}
+
+		System.out.print(getMinH(arr, N, M));
+	}
+
+	private static int getMinH(int[] arr, int N, int M){
+		for (int h=1;h<=N;h++){
+			boolean flag = true;
+			if (arr[0]-h>0) flag = false;
+			else if (arr[M-1]+h<N) flag = false;
+			else {
+				for (int i=1;i<M-1;i++){
+					if (arr[i]+h<arr[i+1]-h) {
+						flag = false; break;
+					}
+				}
+			}
+			if (flag) return h;
+		}
+		return -1;
+	}
 }
