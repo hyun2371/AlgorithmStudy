@@ -1,6 +1,5 @@
 import java.util.*;
 import java.io.*;
-
 public class Main {
 	static int[] uf;
 	public static void main(String[] args) throws IOException {
@@ -13,7 +12,6 @@ public class Main {
 		for (int i = 1; i <= N; i++) {
 			uf[i] = i;
 		}
-
 		StringTokenizer st;
 		for (int i = 0; i < N; i++) {
 			st = new StringTokenizer(br.readLine());
@@ -45,7 +43,6 @@ public class Main {
 		int y = find(v2);
 		if (x!=y) uf[x] = y;
 	}
-
 	private static int find(int v){
 		if (v==uf[v]) return v;
 		return uf[v] = find(uf[v]);
